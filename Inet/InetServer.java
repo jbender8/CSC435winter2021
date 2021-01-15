@@ -1,4 +1,5 @@
-//start of file
+//start of file. Referanced docs.oracle.com for what some things were(ie. java.io, java.net, BufferedReader, Socket, PrintStream, and IOException) but put everthing into my own words strictly refeanced the site to see what it was.
+//Some comments are the same as in InetClient as for they are the same code. 
 import java.io.*; //imports all the the directories located in java.io so that when file is complied it classes. For example, in this code we use java.io.ioexception and import java.io.bufferedreader. By having the java.io.* we do not need to import two things and we can just inport one allowing our code to be cleaner. The specific class io allows us to get a user input and output based on that input.
 import java.net.*; // Just like in the above input the net.* imports all directories in the java.net so we dont have to add mutliple imports. The java.net specifically is a directory in java used to implament networking apps. It allows us to use things like Socket and ServerSocket in our code.
 class Worker extends Thread { //makes our worker.class then file is complied
@@ -18,7 +19,7 @@ class Worker extends Thread { //makes our worker.class then file is complied
                 printRemoteAddress(name, out); //calls the static void printRemoteAddress a few lines down and sets the String to whatever the name vaible was assigned to and the PrintStream to whatever the out vaible was assigned to.
             }//closes second try
             catch (IOException x) { //catches IOExeption when try fails
-                System.out.println("Server read error"); x.printStackTrace (); //prints Server read error and printStackTrace witch prints details about the error including the line number where the execption occurred.
+                System.out.println("Server read error"); x.printStackTrace (); //prints Server read error and printStackTrace witch prints details about the error including the line number where the error occurred.
             } //closes catch
             sock.close(); // closes the Socket called sock
         } //closes first try
@@ -49,7 +50,7 @@ static String toText (byte ip[]) {
 public class InetServer { //new class InetServer
     public static void main(String a[]) throws IOException {
         int q_len = 6; //initialize q_len as an int and assigns it to 6
-        int port = 1581;//initialize part as an int and assigns a port number(can be changed)
+        int port = 1581;//initialize port as an int and assigns a port number(can be changed)
         Socket sock; //makes a Socket called sock
         ServerSocket servsock = new ServerSocket(port, q_len); //makes a new ServerSocket called servsock and puts the port number and q_len assigned above.
         System.out.println
