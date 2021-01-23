@@ -51,3 +51,12 @@ have to restart the clients, they will find the server again when a request
 is made.
 
 ----------------------------------------------------------*/
+
+// Referanced Inet homework assignment from January 2021. Some comments may overlap from JokeClient, JokeClientAdmin and JokeServer.
+// Code Starts Here:
+import java.io.*;// importing all packages in java io.
+import java.net.*;// importing all packages in java net.
+
+public class JokeClientAdmin { // start of the JokeClientAdmin class
+
+}// End of JokeClientAdmin class
