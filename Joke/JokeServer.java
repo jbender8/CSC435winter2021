@@ -1,14 +1,16 @@
 /*--------------------------------------------------------
 
-1. Name / Date:
+1. Name / Date: Jessica Bender / Version 2 1/24/2021
 
 2. Java version used, if not the official version for the class:
 
-e.g. build 1.5.0_06-b05
+My Java:
+java version "9.0.4"
+Java(TM) SE Runtime Environment (build 9.0.4+11)
+Java HotSpot(TM) 64-Bit Server VM (build 9.0.4+11, mixed mode)
+
 
 3. Precise command-line compilation examples / instructions:
-
-e.g.:
 
 > javac JokeServer.java
 
@@ -58,8 +60,23 @@ import java.io.*;// importing all packages in java io.
 import java.net.*;// importing all packages in java net.
 
 public class JokeServer { // start of the JokeServer class
-    public static void main(String[] args) {// start of main method
+    public static String joke(String haha){ //start of joke method take in a string haha
 
+    }
+    public static String proverb(String wisdom){ //start of joke method take in a string haha
+
+    }
+
+    public static void main(String[] args) {// start of main method
+        int q_len = 6; //initialize q_len as an int and assigns it to 6
+        int port = 1581;//initialize port as an int and assigns a port number(can be changed)
+        Socket sock; //makes a Socket called sock
+        ServerSocket servsock = new ServerSocket(port, q_len); //makes a new ServerSocket called servsock and puts the port number and q_len assigned above.
+        System.out.println("Jess Bender's Joke server 4.2 starting up, listening at port 1581.\n");//prints that text on the termial
+        while (true) { //keeps running while its true
+            sock = servsock.accept(); //assignes sock to an accepted servsock.
+            new Worker(sock).start(); //calls on worker class with the sock assigned in it.
+        } //closes while
     }// end of main method
 
 }// End of JokeServer class
