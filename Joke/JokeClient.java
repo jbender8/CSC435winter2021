@@ -64,9 +64,15 @@ public class JokeClient { // start of the JokeClient class
         System.out.println("Using server: " + serverName + ", Port: 1581"); //prints Using server: plus whatever is saved in serverName plus the port.
         BufferedReader in = new BufferedReader(new InputStreamReader(System.in));// new BufferedReader named in
         try {//trys the following code, if fails jumps to catch.
-            String name; //assigns a string vaable to get the users username.
-            String another; //Assigns a string varavle to get the usersinput if they want anther joke or not
-            do {
+            String name; //assigns a string varable to get the users username.
+            String another; //Assigns a string varable to get the usersinput if they want anther joke or not
+            int JokeNum; //Assigns a int varable to randomize the jokes
+            int max; //Assigns a int varable to randomize the jokes max number
+            int min; //Assigns a int varable to randomize the jokes min number
+            max = 100;
+            min = 1;
+            JokeNum =  (int)Math.random() * (max - min + 1) + min;
+            do {//Start if do statement
                 System.out.print("Welcome to the JokeServer! Enter a username to get your first Joke or Proverb: ");//prints statement on terminal. Asking for the users username
                 System.out.flush ();
                 name = in.readLine ();//assigns the text from the BufferedReader in to name.
@@ -74,15 +80,17 @@ public class JokeClient { // start of the JokeClient class
                 System.out.flush ();
                 another = in.readLine ();//assigns the text from the BufferedReader in to another.
 
-                if (name.indexOf("end") < 0)//checks to see if name = quit
-                    getRemoteAddress(name, serverName);//calls function getRemoteAddress below and puts in name and serverName for the 2 string varables.
+                if (another.indexOf("end") < 0 && another.equals("switch"))//checks to see if another = end and switch
+                    getRemoteAddress(name, serverName, JokeNum);//calls function getRemoteAddress below and puts in name and serverName for the second string varables.
             }//closes do 
-            while (name.indexOf("end") < 0);// keep doing the do above until name = quit
-            System.out.println ("Exiting program. Come back for more Jokes and Perverps soon!");//when name = quit print this statement.
+            while (name.indexOf("end") < 0);// keep doing the do above until another = end
+            System.out.println ("Exiting program. Come back for more Jokes and Perverps soon!");//when another = end print this statement.
         }//closes try
         catch (IOException x) {x.printStackTrace ();} //catches IOExeption when try fails and prints the error.
     }//closes main
     
+
+    //not sure if I need the toText methond from Inet will leave here for now tho
     static String toText (byte ip[]) { //new method
         StringBuffer result = new StringBuffer (); //new StringBuffer called result.
         for (int i = 0; i < ip.length; ++ i) {
@@ -91,8 +99,10 @@ public class JokeClient { // start of the JokeClient class
         }//closes for
         return result.toString ();// returns result as a string
     }//closes toText
+
+
     
-    static void getRemoteAddress (String name, String serverName){ //// gets it name and serverName variables from above in the do statement
+    static void getRemoteAddress (String name, String serverName, int JokeNum){ //// gets it name and serverName string variables and JokeNum int varable from above in the do statement 
         Socket sock; //makes Socket variable called sock.
         BufferedReader fromServer; //makes BufferedReader variable called fromServer.
         PrintStream toServer; //makes PrintStream variable called toServer.
@@ -102,7 +112,7 @@ public class JokeClient { // start of the JokeClient class
             sock = new Socket(serverName, 1581); //assigns sock toa new Socket with serverName and the port 1581
             fromServer = new BufferedReader(new InputStreamReader(sock.getInputStream())); //assigns fromServer to a new BufferedReader that gets the input from sock
             toServer = new PrintStream(sock.getOutputStream()); //assigns toServer to a new PrintStream that writes the input from sock
-            toServer.println(name); toServer.flush(); 
+            toServer.println(name); toServer.println(JokeNum); toServer.flush(); //Prints the name and the JokeNum
             
             for (int i = 1; i <=3; i++){
                 textFromServer = fromServer.readLine();//assigns textFromServer to the text in fromServer.
