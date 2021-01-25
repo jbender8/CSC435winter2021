@@ -1,6 +1,6 @@
 /*--------------------------------------------------------
 
-1. Name / Date: Jessica Bender / version 1 - 1/14/2021
+1. Name / Date: Jessica Bender / version 2 - 1/23/2021
 
 2. Java version used, if not the official version for the class:
 
@@ -12,16 +12,9 @@ Java(TM) SE Runtime Environment (build 9.0.4+11)
 Java HotSpot(TM) 64-Bit Server VM (build 9.0.4+11, mixed mode)
 
 3. Precise command-line compilation examples / instructions:
-
-e.g.:
-
-> javac JokeServer.java
-
+> javac JokeClient.java
 
 4. Precise examples / instructions to run this program:
-
-e.g.:
-
 In separate shell windows:
 
 > java JokeServer
@@ -56,3 +49,15 @@ have to restart the clients, they will find the server again when a request
 is made.
 
 ----------------------------------------------------------*/
+
+// Referanced Inet homework assignment from January 2021. Some comments may overlap from JokeClient, JokeClientAdmin and JokeServer.
+// Code Starts Here:
+import java.io.*;// importing all packages in java io.
+import java.net.*;// importing all packages in java net.
+
+public class JokeClient { // start of the JokeClient class
+    public static void main(String[] args) {// start of main method
+
+    } // end main method
+
+}// End of JokeClient class
