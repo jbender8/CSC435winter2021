@@ -57,7 +57,63 @@ import java.net.*;// importing all packages in java net.
 
 public class JokeClient { // start of the JokeClient class
     public static void main(String[] args) {// start of main method
+        String serverName; //initialize serverName as a String varable. 
+        if (args.length < 1) serverName = "localhost";//checks to see if args is less than one. If true, serverName is set equal to localhost.
+        else serverName = args[0];//otherwise serverName is set equal to args[0].
+        System.out.println("Jess Bender's Joke Client, Version 2.\n");//prints statement on terminal.
+        System.out.println("Using server: " + serverName + ", Port: 1581"); //prints Using server: plus whatever is saved in serverName plus the port.
+        BufferedReader in = new BufferedReader(new InputStreamReader(System.in));// new BufferedReader named in
+        try {//trys the following code, if fails jumps to catch.
+            String name; //assigns a string vaable to get the users username.
+            String another; //Assigns a string varavle to get the usersinput if they want anther joke or not
+            do {
+                System.out.print("Welcome to the JokeServer! Enter a username to get your first Joke or Proverb: ");//prints statement on terminal. Asking for the users username
+                System.out.flush ();
+                name = in.readLine ();//assigns the text from the BufferedReader in to name.
+                System.out.print("To receive your next Joke or Proverb enter 'next'! To swich from Joke to Proverb or vise versa enter 'switch'! To end program type 'end'. ");//prints statement on terminal. Asking the user if they want another joke or not
+                System.out.flush ();
+                another = in.readLine ();//assigns the text from the BufferedReader in to another.
 
-    } // end main method
+                if (name.indexOf("end") < 0)//checks to see if name = quit
+                    getRemoteAddress(name, serverName);//calls function getRemoteAddress below and puts in name and serverName for the 2 string varables.
+            }//closes do 
+            while (name.indexOf("end") < 0);// keep doing the do above until name = quit
+            System.out.println ("Exiting program. Come back for more Jokes and Perverps soon!");//when name = quit print this statement.
+        }//closes try
+        catch (IOException x) {x.printStackTrace ();} //catches IOExeption when try fails and prints the error.
+    }//closes main
+    
+    static String toText (byte ip[]) { //new method
+        StringBuffer result = new StringBuffer (); //new StringBuffer called result.
+        for (int i = 0; i < ip.length; ++ i) {
+            if (i > 0) result.append ("."); // add . to result if i is larger than 0.
+            result.append (0xff & ip[i]); // if not greater than 0 0xff & ip[i] gets added to result.
+        }//closes for
+        return result.toString ();// returns result as a string
+    }//closes toText
+    
+    static void getRemoteAddress (String name, String serverName){ //// gets it name and serverName variables from above in the do statement
+        Socket sock; //makes Socket variable called sock.
+        BufferedReader fromServer; //makes BufferedReader variable called fromServer.
+        PrintStream toServer; //makes PrintStream variable called toServer.
+        String textFromServer; //makes String variable called textFromServer.
+        
+        try{//trys the following code, if fails jumps to catch.
+            sock = new Socket(serverName, 1581); //assigns sock toa new Socket with serverName and the port 1581
+            fromServer = new BufferedReader(new InputStreamReader(sock.getInputStream())); //assigns fromServer to a new BufferedReader that gets the input from sock
+            toServer = new PrintStream(sock.getOutputStream()); //assigns toServer to a new PrintStream that writes the input from sock
+            toServer.println(name); toServer.flush(); 
+            
+            for (int i = 1; i <=3; i++){
+                textFromServer = fromServer.readLine();//assigns textFromServer to the text in fromServer.
+                if (textFromServer != null) System.out.println(textFromServer); //checks to make sure textFromServer is not null/ empty and id so prints whatever was in textFromServer.
+            }//closes for
+            sock.close();//closes sock
+        } //closes try
+        catch (IOException x) { //catches IOExeption when try fails.
+            System.out.println ("Socket error.");
+            x.printStackTrace ();//prints Socket error and printStackTrace witch prints details about the error including the line number where the error occurred.
+        }//closes catch
+    }//closes getRemoteAddress
 
 }// End of JokeClient class
