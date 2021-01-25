@@ -17,7 +17,6 @@ Java HotSpot(TM) 64-Bit Server VM (build 9.0.4+11, mixed mode)
 
 4. Precise examples / instructions to run this program:
 
-e.g.:
 
 In separate shell windows:
 
@@ -25,14 +24,7 @@ In separate shell windows:
 > java JokeClient
 > java JokeClientAdmin
 
-All acceptable commands are displayed on the various consoles.
 
-This runs across machines, in which case you have to pass the IP address of
-the server to the clients. For exmaple, if the server is running at
-140.192.1.22 then you would type:
-
-> java JokeClient 140.192.1.22
-> java JokeClientAdmin 140.192.1.22
 
 5. List of files needed for running the program.
 
@@ -43,14 +35,9 @@ e.g.:
  c. JokeClient.java
  d. JokeClientAdmin.java
 
-5. Notes:
+6. Notes:
 
-e.g.:
-
-I faked the random number generator. I have a bug that comes up once every
-ten runs or so. If the server hangs, just kill it and restart it. You do not
-have to restart the clients, they will find the server again when a request
-is made.
+For this to run since it is a little buggy put joke in JokeClientAdmin, but a username into Jokeclient then type switch to get jokes. I dont think it will give you any perverbs and it also jsut keeps running. I ran out of time and wanted to get some credit
 
 ----------------------------------------------------------*/
 
@@ -149,7 +136,7 @@ class AdminLooper implements Runnable {
       System.out.println("In the admin looper thread");//prints to termail
       
       int q_len = 6; //q_len is = 6
-      int port = 5032;  // new port number for admin
+      int port = 2571;  // new port number for admin
       Socket sock;//new socet called soc
       try{//try
         ServerSocket servsock = new ServerSocket(port, q_len); //New ServerSocket Called sevsock with port and len
@@ -221,7 +208,7 @@ public class JokeServer { // start of the JokeServer class
 
     public static void main(String a[]) throws IOException {// start of main method
         int q_len = 6; //initialize q_len as an int and assigns it to 6
-        int port = 1581;//initialize port as an int and assigns a port number(can be changed)
+        int port = 1591;//initialize port as an int and assigns a port number(can be changed)
         Socket sock; //makes a Socket called sock
         AdminLooper loop = new AdminLooper();//new Adminlooper called loop
         Thread thread = new Thread(loop);//new tread taking in AdminLooper
