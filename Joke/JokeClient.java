@@ -69,11 +69,11 @@ public class JokeClient { // start of the JokeClient class
             int JokeNum; //Assigns a int varable to randomize the jokes
             int max; //Assigns a int varable to randomize the jokes max number
             int min; //Assigns a int varable to randomize the jokes min number
-            max = 100;
-            min = 1;
-            JokeNum =  (int)Math.random() * (max - min + 1) + min;
+            max = 100; //Assigning max to 100 for now not sure what the number should be yet. Maybe 4? since there are 4 Jokes and 4 Perverbs.
+            min = 1; //Also sasigning min to 1 for now not sure what the number should be yet. Think it should be 1 or 0?
+            JokeNum =  (int)Math.random() * (max - min + 1) + min; //getting a random number for jokeNum using the Math.random function. However since math.random gives a double I multiplied it by int so it would give me an int
             do {//Start if do statement
-                System.out.print("Welcome to the JokeServer! Enter a username to get your first Joke or Proverb: ");//prints statement on terminal. Asking for the users username
+                System.out.print("Welcome to the JokeServer! Enter a username to get your first Joke or Proverb: ");//prints statement on terminal. Saying welcome and Asking for the users username
                 System.out.flush ();
                 name = in.readLine ();//assigns the text from the BufferedReader in to name.
                 System.out.print("To receive your next Joke or Proverb enter 'next'! To swich from Joke to Proverb or vise versa enter 'switch'! To end program type 'end'. ");//prints statement on terminal. Asking the user if they want another joke or not
@@ -84,7 +84,7 @@ public class JokeClient { // start of the JokeClient class
                     getRemoteAddress(name, serverName, JokeNum);//calls function getRemoteAddress below and puts in name and serverName for the second string varables.
             }//closes do 
             while (name.indexOf("end") < 0);// keep doing the do above until another = end
-            System.out.println ("Exiting program. Come back for more Jokes and Perverps soon!");//when another = end print this statement.
+            System.out.println ("Exiting program. Come back for more Jokes and Perverps soon!");//when another = end print this statement. saying they are exiting the program and tell them to come back soon!
         }//closes try
         catch (IOException x) {x.printStackTrace ();} //catches IOExeption when try fails and prints the error.
     }//closes main
