@@ -63,11 +63,11 @@ class Worker extends Thread{ //start Worker class. This class will
                 String name;//makes a new string called name
                 name = in.readLine ();//assigns the string variable name to what was read in the the varaible in. 
                 if(JokeServer.Laugh == true){
-                    out.println("Looking up " + name + "Joke"); //prints Lokking up and whatever was saved into the variable name to the terminal.
+                    out.println("Looking up " + name + " Joke"); //prints Lokking up and whatever was saved into the variable name to the terminal.
                     printJoke(name, out); //calls the static void printJoke a few lines down and sets the String to whatever the name vaible was assigned to and the PrintStream to whatever the out vaible was assigned to.
                 }//close if
                 else if(JokeServer.Laugh == false){
-                    out.println("Looking up " + name + "Proverb"); //prints Lokking up and whatever was saved into the variable name to the terminal.
+                    out.println("Looking up " + name + " Proverb"); //prints Lokking up and whatever was saved into the variable name to the terminal.
                     printProverb(name, out); //calls the static void printJoke a few lines down and sets the String to whatever the name vaible was assigned to and the PrintStream to whatever the out vaible was assigned to.
                 }//close if
             }//closes second try
@@ -81,8 +81,8 @@ class Worker extends Thread{ //start Worker class. This class will
 
     static void printJoke(String name, PrintStream out){//Start printJoke method
         int[] usedjokes = new int[] {0,0,0,0};//int array to see if joke was used 0 = not used 1 = used
-        while(usedjokes[0]==0 && usedjokes[1]==0 && usedjokes[2]==0 && usedjokes[3]==0){
-            int random = (int)(Math.random() * 4) + 1;//generates a random number from 1 to 5
+        int random = (int)(Math.random() * 4) + 1;//generates a random number from 1 to 5
+        while(usedjokes[0]==0 || usedjokes[1]==0 || usedjokes[2]==0 || usedjokes[3]==0){
 
             if (random == 1 && usedjokes[0] == 0){
                 usedjokes[0]=1;//setting it to 1 now so i know it was used
@@ -104,8 +104,8 @@ class Worker extends Thread{ //start Worker class. This class will
     }//end printJoke method
     static void printProverb(String name, PrintStream out){//Start printProverb method
         int[] usedProvervs = new int[] {0,0,0,0};//int array to see if proverb was used 0 = not used 1 = used
-        while(usedProvervs[0]==0 && usedProvervs[1]==0 && usedProvervs[2]==0 && usedProvervs[3]==0){
-            int random = (int)(Math.random() * 4) + 1;//generates a random number from 1 to 5
+        int random = (int)(Math.random() * 4) + 1;//generates a random number from 1 to 5
+        while(usedProvervs[0]==0 || usedProvervs[1]==0 || usedProvervs[2]==0 || usedProvervs[3]==0){
             if (random == 1 && usedProvervs[0] == 0){
                 usedProvervs[0]=1;//setting it to 1 now so i know it was used
                 System.out.println(JokeServer.proverb("PA"));//printing joke A
@@ -162,15 +162,15 @@ class AdminWorker extends Thread{//begining half is same as worker
             try { //will try the things within the try otherwise will skip to catch
                 String choice;//makes a new string called choice
                 choice = in.readLine ();//assigns the string variable choice to what was read in the the varaible in. 
-                if (choice.indexOf("joke") < 0){//if joke=true
-                    JokeServer.Laugh = false;
-                    JokeServer.Wise = true;
+                if (choice.indexOf("perverb") < 0){//if joke=true
+                    JokeServer.Laugh = true;
+                    JokeServer.Wise = false;
                     System.out.println("Let's Get some Jokes!");
                     out.println("Let's Get some Jokes!");
                 }//closes if
                 else{
-                    JokeServer.Wise = true;
                     JokeServer.Laugh = false;
+                    JokeServer.Wise = true;
                     System.out.println("Let's Get some Proverbs!");
                     out.println("Let's Get some Proverbs!");
                 }
