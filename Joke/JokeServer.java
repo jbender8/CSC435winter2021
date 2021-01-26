@@ -55,16 +55,27 @@ is made.
 ----------------------------------------------------------*/
 
 // Referanced Inet homework assignment from January 2021. Some comments may overlap from JokeClient, JokeClientAdmin and JokeServer.
+// All Jokes were taken from google. here is the link used https://www.rd.com/list/short-jokes/
+// All Proverbs were taken from google. here is the link used https://lemongrad.com/proverbs-with-meanings-and-examples/ 
 // Code Starts Here:
 import java.io.*;// importing all packages in java io.
 import java.net.*;// importing all packages in java net.
+import java.util.HashMap; //importing hashmaps to use to store jokes and proverbs
 
 public class JokeServer { // start of the JokeServer class
     public static String joke(String haha){ //start of joke method take in a string haha
-
+        HashMap<String, String> Jokes = new HashMap<String, String>(); //making a new hashmap to store my jokes. First string in the hashmap will be for the joke numbers ie JA, JB, JC, and JD. the second string will be the actual joke.
+        Jokes.put("JA", "Why did the nurse need a red pen at work? In case she needed to draw blood."); //first joke.
+        Jokes.put("JB", "I invented a new word! Plagiarism!"); //Second joke.
+        Jokes.put("JC", "Yesterday I saw a guy spill all his scrabble letter on the road. I asked him, 'what's the word on the street?'"); //Third joke.
+        Jokes.put("JD", "Hear about the new resturant called Karma? There's no menu: You get what you deserve."); //Fouth joke.
     }
     public static String proverb(String wisdom){ //start of joke method take in a string haha
-
+        HashMap<String, String> Proverbs = new HashMap<String, String>(); //making a new hashmap to store my jokes. First string in the hashmap will be for the joke numbers ie JA, JB, JC, and JD. the second string will be the actual joke.
+        Proverbs.put("PA", "A bad workman always blames his tools."); //first Proverb.
+        Proverbs.put("PB", "A journey of thousand miles begins with a single step."); //Second Proverb.
+        Proverbs.put("PC", "Beggars can’t be choosers."); //Third Proverb.
+        Proverbs.put("PD", "Beauty is in the eye of the beholder."); //Fouth Proverb.
     }
 
     public static void main(String[] args) {// start of main method
