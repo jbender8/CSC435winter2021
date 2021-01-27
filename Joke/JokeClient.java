@@ -1,6 +1,6 @@
 /*--------------------------------------------------------
 
-1. Name / Date: Jessica Bender / version 2 - 1/23/2021
+1. Name / Date: Jessica Bender / version 2 - 1/24/2021
 
 2. Java version used, if not the official version for the class:
 
@@ -21,14 +21,7 @@ In separate shell windows:
 > java JokeClient
 > java JokeClientAdmin
 
-All acceptable commands are displayed on the various consoles.
 
-This runs across machines, in which case you have to pass the IP address of
-the server to the clients. For exmaple, if the server is running at
-140.192.1.22 then you would type:
-
-> java JokeClient 140.192.1.22
-> java JokeClientAdmin 140.192.1.22
 
 5. List of files needed for running the program.
 
@@ -39,14 +32,10 @@ e.g.:
  c. JokeClient.java
  d. JokeClientAdmin.java
 
-5. Notes:
+6. Notes:
 
-e.g.:
+For this to run since it is a little buggy put joke in JokeClientAdmin, but a username into Jokeclient then type switch to get jokes. I dont think it will give you any perverbs and it also jsut keeps running. I ran out of time and wanted to get some credit
 
-I faked the random number generator. I have a bug that comes up once every
-ten runs or so. If the server hangs, just kill it and restart it. You do not
-have to restart the clients, they will find the server again when a request
-is made.
 
 ----------------------------------------------------------*/
 
@@ -90,12 +79,12 @@ public class JokeClient { // start of the JokeClient class
                     System.out.flush ();
                     another = in.readLine ();//assigns the text from the BufferedReader in to another.
                     if (another.indexOf("end") < 0 && another.equals("switch")){//checks to see if another = end and switch
-                        getRemoteAddress(name, serverName);//calls function getRemoteAddress below and puts in name and serverName for the second string varables.
+                        getRemoteAddress(another, serverName);//calls function getRemoteAddress below and puts in name and serverName for the second string varables.
                     }//close if
                 }
                 //closes 2nd do 
                 while (another.indexOf("end") < 0);// keep doing the do above until another = end
-                System.out.println ("Exiting program. Come back for more Jokes and Perverps soon!");//when another = end print this statement. saying they are exiting the program and tell them to come back soon!
+                System.out.println ("Exiting program. Come back for more Jokes and Perverbs soon!");//when another = end print this statement. saying they are exiting the program and tell them to come back soon!
             }//closes try
         catch (IOException x) {x.printStackTrace ();} //catches IOExeption when try fails and prints the error.
     }//closes main
@@ -120,7 +109,7 @@ public class JokeClient { // start of the JokeClient class
         String textFromServer; //makes String variable called textFromServer.
         
         try{//trys the following code, if fails jumps to catch.
-            sock = new Socket(serverName, 1581); //assigns sock toa new Socket with serverName and the port 1581
+            sock = new Socket(serverName, 1591); //assigns sock toa new Socket with serverName and the port 1581
             fromServer = new BufferedReader(new InputStreamReader(sock.getInputStream())); //assigns fromServer to a new BufferedReader that gets the input from sock
             toServer = new PrintStream(sock.getOutputStream()); //assigns toServer to a new PrintStream that writes the input from sock
             toServer.println(name); toServer.flush(); //Prints the name and the JokeNum
