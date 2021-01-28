@@ -78,7 +78,7 @@ public class JokeClient { // start of the JokeClient class
                     System.out.print("To receive your next Joke or Proverb enter 'next'! To swich from Joke to Proverb or vise versa enter 'switch'! To end program type 'end': ");//prints statement on terminal. Asking the user if they want another joke or not
                     System.out.flush ();
                     another = in.readLine ();//assigns the text from the BufferedReader in to another.
-                    if (another.indexOf("end") < 0 && another.equals("switch")){//checks to see if another = end and switch
+                    if (another.indexOf("end") < 0 ){//checks to see if another = end and switch
                         getRemoteAddress(another, serverName);//calls function getRemoteAddress below and puts in name and serverName for the second string varables.
                     }//close if
                 }

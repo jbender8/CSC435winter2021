@@ -62,12 +62,12 @@ class Worker extends Thread{ //start Worker class. This class will
             try { //will try the things within the try otherwise will skip to catch
                 String name;//makes a new string called name
                 name = in.readLine ();//assigns the string variable name to what was read in the the varaible in. 
-                if(JokeServer.joke == true){
-                    System.out.println("Looking up " + name + "Joke"); //prints Lokking up and whatever was saved into the variable name to the terminal.
+                if(JokeServer.Laugh == true){
+                    out.println("Looking up " + name + "Joke"); //prints Lokking up and whatever was saved into the variable name to the terminal.
                     printJoke(name, out); //calls the static void printJoke a few lines down and sets the String to whatever the name vaible was assigned to and the PrintStream to whatever the out vaible was assigned to.
                 }//close if
-                else if(JokeServer.joke == false){
-                    System.out.println("Looking up " + name + "Proverb"); //prints Lokking up and whatever was saved into the variable name to the terminal.
+                else if(JokeServer.Laugh == false){
+                    out.println("Looking up " + name + "Proverb"); //prints Lokking up and whatever was saved into the variable name to the terminal.
                     printProverb(name, out); //calls the static void printJoke a few lines down and sets the String to whatever the name vaible was assigned to and the PrintStream to whatever the out vaible was assigned to.
                 }//close if
             }//closes second try
@@ -80,9 +80,9 @@ class Worker extends Thread{ //start Worker class. This class will
     } // closes run()
 
     static void printJoke(String name, PrintStream out){//Start printJoke method
-        while(true){
+        int[] usedjokes = new int[] {0,0,0,0};//int array to see if joke was used 0 = not used 1 = used
+        while(usedjokes[0]==0 && usedjokes[1]==0 && usedjokes[2]==0 && usedjokes[3]==0){
             int random = (int)(Math.random() * 4) + 1;//generates a random number from 1 to 5
-            int[] usedjokes = new int[] {0,0,0,0};//int array to see if joke was used 0 = not used 1 = used
 
             if (random == 1 && usedjokes[0] == 0){
                 usedjokes[0]=1;//setting it to 1 now so i know it was used
@@ -103,24 +103,24 @@ class Worker extends Thread{ //start Worker class. This class will
     }//end while
     }//end printJoke method
     static void printProverb(String name, PrintStream out){//Start printProverb method
-       while(true){
-            int[] usedProvervs = new int[] {0,0,0,0};//int array to see if proverb was used 0 = not used 1 = used
-            int random = (int)(Math.random() * 5) + 1;//generates a random number from 1 to 5
+        int[] usedProvervs = new int[] {0,0,0,0};//int array to see if proverb was used 0 = not used 1 = used
+        while(usedProvervs[0]==0 && usedProvervs[1]==0 && usedProvervs[2]==0 && usedProvervs[3]==0){
+            int random = (int)(Math.random() * 4) + 1;//generates a random number from 1 to 5
             if (random == 1 && usedProvervs[0] == 0){
                 usedProvervs[0]=1;//setting it to 1 now so i know it was used
-                System.out.println(JokeServer.joke("JA"));//printing joke A
+                System.out.println(JokeServer.proverb("PA"));//printing joke A
             }//end if
                 else if(random == 2 && usedProvervs[1] == 0){
                     usedProvervs[1]=1;//setting it to 1 now so i know it was used
-                    System.out.println(JokeServer.joke("JB"));//printing joke B
+                    System.out.println(JokeServer.proverb("PB"));//printing joke B
             }//clsoes else if
             else if(random == 3 && usedProvervs[2] == 0){
                 usedProvervs[2]=1;//setting it to 1 now so i know it was used
-                System.out.println(JokeServer.joke("JC"));//printing joke B
+                System.out.println(JokeServer.proverb("PC"));//printing joke B
         }//clsoes else if
             else if(random == 4 && usedProvervs[3] == 0){
                 usedProvervs[3]=1;//setting it to 1 now so i know it was used
-                System.out.println(JokeServer.joke("JD"));//printing joke B
+                System.out.println(JokeServer.proverb("PD"));//printing joke B
             }//clsoes else if
     }//end while
     }//end printProverb method
@@ -163,14 +163,14 @@ class AdminWorker extends Thread{//begining half is same as worker
                 String choice;//makes a new string called choice
                 choice = in.readLine ();//assigns the string variable choice to what was read in the the varaible in. 
                 if (choice.indexOf("joke") < 0){//if joke=true
-                    JokeServer.joke = true;
-                    JokeServer.proverb = false;
+                    JokeServer.Laugh = false;
+                    JokeServer.Wise = true;
                     System.out.println("Let's Get some Jokes!");
                     out.println("Let's Get some Jokes!");
                 }//closes if
                 else{
-                    JokeServer.proverb = true;
-                    JokeServer.joke = false;
+                    JokeServer.Wise = true;
+                    JokeServer.Laugh = false;
                     System.out.println("Let's Get some Proverbs!");
                     out.println("Let's Get some Proverbs!");
                 }
@@ -183,8 +183,8 @@ class AdminWorker extends Thread{//begining half is same as worker
   
 public class JokeServer { // start of the JokeServer class
     static String choice ="proverb";//makes a static varable to see if the user is on joke or proverb. I am also initizing it as a proverb
-    static Boolean joke; //makes a static boolean for joke
-    static Boolean proverb; //makes a static boolean for proverb
+    static Boolean Laugh; //makes a static boolean for joke
+    static Boolean Wise; //makes a static boolean for proverb
 
     public static String joke(String haha){ //start of joke method take in a string haha
         HashMap<String, String> Jokes = new HashMap<String, String>(); //making a new hashmap to store my jokes. First string in the hashmap will be for the joke numbers ie JA, JB, JC, and JD. the second string will be the actual joke.
@@ -193,16 +193,16 @@ public class JokeServer { // start of the JokeServer class
         Jokes.put("JC", "Yesterday I saw a guy spill all his scrabble letter on the road. I asked him, 'what's the word on the street?'"); //Third joke.
         Jokes.put("JD", "Hear about the new resturant called Karma? There's no menu: You get what you deserve."); //Fouth joke.
 
-        return haha+":" + Jokes.get(haha);
+        return haha+": " + Jokes.get(haha);
     }//closes joke
     public static String proverb(String wisdom){ //start of joke method take in a string haha
         HashMap<String, String> Proverbs = new HashMap<String, String>(); //making a new hashmap to store my jokes. First string in the hashmap will be for the joke numbers ie JA, JB, JC, and JD. the second string will be the actual joke.
         Proverbs.put("PA", "A bad workman always blames his tools."); //first Proverb.
         Proverbs.put("PB", "A journey of thousand miles begins with a single step."); //Second Proverb.
-        Proverbs.put("PC", "Beggars can’t be choosers."); //Third Proverb.
+        Proverbs.put("PC", "Beggars cant be choosers."); //Third Proverb.
         Proverbs.put("PD", "Beauty is in the eye of the beholder."); //Fouth Proverb.
 
-        return wisdom+":" + Proverbs.get(wisdom);
+        return wisdom+": " + Proverbs.get(wisdom);
 
     }//closes proverb
 
