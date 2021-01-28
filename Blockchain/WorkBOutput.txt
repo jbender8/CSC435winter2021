@@ -1,0 +1,24 @@
+java WorkB
+
+Enter some blockdata: Now is the time for scientists to educate all.
+Our example random seed string is: HFG0UDE4
+
+Concatenated with the "data": Now is the time for scientists to educate all.HFG0UDE4
+
+Number will be between 0000 (0) and FFFF (65535)
+
+0x0000 = 0
+0xFFFF = 65535
+
+Hash is: AC9FEA95C9D521272A0872144BB7F80210AEC36DDF1B3A10A417D0D03C86F56E
+First 16 bits in Hex and Decimal: AC9F and 44191
+44191 is not less than 20,000 so we did not solve the puzzle
+
+Hash is: 7114C6616AA8EEC261E84DDA83BBB14B7F969178707CFB54BF9AE0258F9DAD9A
+First 16 bits in Hex and Decimal: 7114 and 28948
+28948 is not less than 20,000 so we did not solve the puzzle
+
+Hash is: 15D2BFBF29AE593C35502B56342B98779B1FFEA816C23B91A3DCD8C5023ADF04
+First 16 bits in Hex and Decimal: 15D2 and 5586
+5586 IS less than 20,000 so puzzle solved!
+The seed (puzzle answer) was: PUKCO383

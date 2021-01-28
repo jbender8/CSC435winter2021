@@ -1,0 +1,120 @@
+<html> <head> <title> DS 435 -- Elliott Web Server Tips </center> </title>
+</head>
+<body>
+1.1
+
+updates: <br>
+<ol>
+<li> 2019-05-09: fixed link to 150-line webserver Thanks Amo!
+</ol> 
+
+
+
+
+
+<FONT FACE="Cambria" SIZE=5>
+<center> Elliott MyWebServer Tips </center>
+<FONT FACE="Cambria" SIZE=3>
+
+Disclaimer: try these. No guarantees.
+
+<pre>
+(Thanks Trevor)
+If having trouble with file name slashes tyr ".replace("\\", "/")"
+</pre>
+
+<h3> Getting root directory: </h3>
+<pre>
+
+(Thanks Boma)
+
+import java.io.*;
+
+public class ShowDir {
+  public static void main(String[] args) {
+    File f = new File(".");
+    try{
+      String directoryRoot = f.getCanonicalPath();
+      System.out.print("Directory root is: " + directoryRoot);
+    }catch (Throwable e){e.printStackTrace();}
+  }
+}
+</pre>
+
+<h3> Firefox addin for viewing HTTP headers: </h3>
+
+<a href= https://addons.mozilla.org/en-US/firefox/addon/60>
+https://addons.mozilla.org/en-US/firefox/addon/60 </a>
+
+<h3> Writing http headers: </h3> 
+
+Note: your browser may work differently. You WILL have to play with this!
+These <i> snippets </i> (that is, only part of the code) are just some
+suggestions for getting started. For debugging, use a separate stream and
+also write a duplicate of everything to your system console, or a file,
+identically to what you are writing to the socket. Post to newsgroup if you
+have questions, suggestions, updates.<p>
+
+<pre>
+   (Thanks Eric)
+
+   private PrintStream	out = null;
+   [...]
+   out.append("HTTP/1.1 200 OK\n");
+   out.append("Date: " + new Date() + "\n");
+   out.append("\n\n");
+   etc.
+</pre>
+
+and:
+
+<pre>
+
+  (Thanks John)
+
+  static final byte[] EOL = {(byte) '\r', (byte) '\n'};
+
+  OutputStream out = new BufferedOutputStream(sock.getOutputStream());
+  PrintWriter prntout = new PrintWriter(new OutputStreamWriter(out), true);
+
+
+  prntout.println("HTTP/1.1 200 OK");
+  prntout.println("Content-Length: " + thedata.length());
+
+  prntout.println("Content-type: " + ct);
+  out.write(EOL);
+</pre>
+
+and:
+
+<pre>
+  (Thanks Kevin)
+
+   private String outputData = 
+  "HTTP/1.1 200 OK" + "\r\n" +
+  "Content-Length: " + "LENGTH" + "\r\n" +
+  "Connection: CONNECTION" + "\r\n" +
+  "DATATYPE" + "\r\n\r\n";
+
+  [Use stringval.replace(x.y) substitution for values determined at runtime]
+</pre>
+
+and: 
+
+
+In THIS server you have to specify the directory where you will be serving
+files from. (In our server we use the location where the server was
+started.)<p>
+
+In Windows I used:
+<pre>
+> java FileServer 3344 c:\Users\Elliott
+</pre>
+
+and<p>
+
+<a href=http://cs.au.dk/~amoeller/WWW/javaweb/server.html>  150 line
+web server </a> may be of some background use.<p>
+
+</body>
+</html>

@@ -1,0 +1,81 @@
+JSON> javac -cp "gson-2.8.2.jar" BlockJ.java 
+
+JSON> java -cp ".;gson-2.8.2.jar" BlockJ
+In the constructor...
+Running now
+
+
+ =========> In DemonstrateUtilities <=========
+
+Process number: 0 Ports: 4710 4810
+
+Timestamp:  2020-02-10.20:39:39.0
+
+Has the signature been verified: true
+
+Hexidecimal byte[] Representation of Original SHA256 Hash:
+cb28775a502efafdd950e2085868d228ef5274d7521f5029c1a5fd051624da2c
+
+The signed SHA-256 string:
+jPwb8nPJvThhGShj3gNzapE59BOp0BqupTZiIvRE5TI+EPAvpQtOoOQwdRYMsN0YOHdvmBkcEg9IwdNmqO6mEeePDXdz78NvPvknHZNcT0xlMWApkEYVhxK7efw3YlDI6HfkcW2hPIgJsrT06xBnjZHQIRU812NK5qql0SmT44s=
+
+Testing restore of signature: true
+Has the restored signature been verified: true
+
+Key in Byte[] form: [B@610455d6
+Key in String form:
+MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQCxwC8yRl9AaFSfZ/ih+x3PKBcSr5yEmc7mcNmu2fC1SdFlG8svSnxLZJTmtCVB5qybpPrtnybZ2udQeqZjew5T+mDOirqxzlJh5RlmmootlIxTCqUtsgmBBHscx3mypzsz/lOUUUsGmLsrQpyK3qqHE0Fq9aoOAFB0krwzTH/KFQIDAQAB
+
+Bad key in String form:
+MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQCxwC8yRl9AaFMfZ/ih+x3PKBcSr5yEmc7mcNmu2fC1SdFlG8svSnxLZJTmtCVB5qybpPrtnybZ2udQeqZjew5T+mDOirqxzlJh5RlmmootlIxTCqUtsgmBBHscx3mypzsz/lOUUUsGmLsrQpyK3qqHE0Fq9aoOAFB0krwzTH/KFQIDAQAB
+Key in Byte[] form again: [B@511d50c0
+Has the signature been verified: true
+
+Has the CONVERTED-FROM-STRING signature been verified: true
+
+Damaged key in Byte[] form: [B@60e53b93
+Has the CONVERTED-FROM-STRING bad key signature been verified: false
+
+We will now simulate some work: 
+..... <-- We did 4 tenths of a second of *work*.
+
+
+Extra encryption functionality in case you want it:
+Starting Hash string:
+cb28775a502efafdd950e2085868d228ef5274d7521f5029c1a5fd051624da2c
+Encrypted Hash string:
+aJRCIDiafi8Gd6eH/E4vTowubwDbjFP0fXxwbCECTywQf/iLk3jZakqPj+h9gFmUKCo8nocnRC8OSz7oMfh5+LeYFAUv0F7xwH6Dl51/4znLA1zGvSP3AcTM1MU4xAF2+EFZV7sMsFHQx7m/fUYDsvsdGDZjqxwvvg3RyBi7cyE=
+Original (now decrypted) Hash string:
+cb28775a502efafdd950e2085868d228ef5274d7521f5029c1a5fd051624da2c
+
+=========> In WriteJSON <=========
+
+Unique Block ID: 9f832fa5-3c3d-4c63-8e1e-7c9fb3647b59
+
+Our string random seed is: 9C870F. Wait, I mean it is: d75c85
+
+String blockRecord is:
+9f832fa5-3c3d-4c63-8e1e-7c9fb3647b59Process2nullJosephChang123-45-6789Hot
+Chili Peppersnulld75c85
+
+JSON String blockRecord is: {
+  "BlockID": "9f832fa5-3c3d-4c63-8e1e-7c9fb3647b59",
+  "VerificationProcessID": "Process2",
+  "uuid": "9f832fa5-3c3d-4c63-8e1e-7c9fb3647b59",
+  "Fname": "Joseph",
+  "Lname": "Chang",
+  "SSNum": "123-45-6789",
+  "Rx": "Hot Chili Peppers",
+  "RandomSeed": "d75c85",
+  "WinningHash":
+  "755cf1a5b6aaa1f57a0043bbbf486a7a7a2c3ddf7b0da6006f65adc052593726"
+}
+
+=========> In ReadJSON <=========
+
+BlockRecord@5a61f5df
+Name is: Joseph Chang
+String UUID: 9f832fa5-3c3d-4c63-8e1e-7c9fb3647b59 Stored-binaryUUID:
+9f832fa5-3c3d-4c63-8e1e-7c9fb3647b59
+
+JSON> 
