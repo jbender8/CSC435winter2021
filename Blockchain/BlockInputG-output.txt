@@ -1,0 +1,83 @@
+> java -cp ".;gson-2.8.2.jar" BlockInputG 2 
+
+In the constructor...
+Running now
+
+Process number: 2 Ports: 4712 4822
+
+Using input file: BlockInput2.txt
+Timestamp:  2020-02-24.22:10:27.2
+Timestamp:  2020-02-24.22:10:28.2
+Timestamp:  2020-02-24.22:10:29.2
+Timestamp:  2020-02-24.22:10:30.2
+4 records read.
+
+Records in the linked list:
+ 2020-02-24.22:10:27.2 Helen Keller
+ 2020-02-24.22:10:28.2 Abraham Lincoln
+ 2020-02-24.22:10:29.2 John Kennedy
+ 2020-02-24.22:10:30.2 Joe DiMaggio
+
+The shuffled list:
+ 2020-02-24.22:10:30.2 Joe DiMaggio
+ 2020-02-24.22:10:27.2 Helen Keller
+ 2020-02-24.22:10:29.2 John Kennedy
+ 2020-02-24.22:10:28.2 Abraham Lincoln
+
+Placing shuffled records in our priority queue...
+
+Priority Queue (restored) Order:
+ 2020-02-24.22:10:27.2 Helen Keller
+ 2020-02-24.22:10:28.2 Abraham Lincoln
+ 2020-02-24.22:10:29.2 John Kennedy
+ 2020-02-24.22:10:30.2 Joe DiMaggio
+
+
+
+
+JSON String list is: [
+  {
+    "BlockID": "b24b7a98-de9d-464b-82c8-1d2cad831224",
+    "TimeStamp": " 2020-02-24.22:10:30.2",
+    "Fname": "Joe",
+    "Lname": "DiMaggio",
+    "SSNum": "111-22-3333",
+    "DOB": "1914.11.25",
+    "Diag": "SoreKnees",
+    "Treat": "RestFromSports",
+    "Rx": "Aspirin"
+  },
+  {
+    "BlockID": "9b6870ca-3d31-4474-897d-543e9b8200d4",
+    "TimeStamp": " 2020-02-24.22:10:27.2",
+    "Fname": "Helen",
+    "Lname": "Keller",
+    "SSNum": "666-45-6789",
+    "DOB": "1880.06.27",
+    "Diag": "Arthritis",
+    "Treat": "WarmCloths",
+    "Rx": "Aspirin"
+  },
+  {
+    "BlockID": "042792ee-2605-40c2-967c-2adfd0f80fb6",
+    "TimeStamp": " 2020-02-24.22:10:29.2",
+    "Fname": "John",
+    "Lname": "Kennedy",
+    "SSNum": "333-45-6999",
+    "DOB": "1917.05.29",
+    "Diag": "AddisonsDisease",
+    "Treat": "DrugTherapy",
+    "Rx": "Steroids"
+  },
+  {
+    "BlockID": "53b2e59f-9907-48e3-a383-1809a7c83bd6",
+    "TimeStamp": " 2020-02-24.22:10:28.2",
+    "Fname": "Abraham",
+    "Lname": "Lincoln",
+    "SSNum": "444-45-6888",
+    "DOB": "1809.02.12",
+    "Diag": "GreviousWound",
+    "Treat": "Surgery",
+    "Rx": "Whiskey"
+  }
+]

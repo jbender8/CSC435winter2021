@@ -1,0 +1,75 @@
+/** File is: HostServer.java 10-24-05  Version 1.0
+
+Author Clark Elliott. Status: throw-away code to illustrate some points for class.
+
+NOTE: This is NOT a suggested implementation for your agent platform,
+but rather a running example of something that might serve some of
+your needs, or provide a way to start thinking about what YOU would like to do.
+You may freely use this code as long as you improve it and write your own comments.
+
+-----------------------------------------------------------------------------------
+
+TO EXECUTE: 
+
+1. Start the HostServer in some shell. >> java HostServer
+
+1. start a web browser and point it to http://localhost:1565. Enter some text and press
+the submit button to simulate playing the animal game.
+
+2. start a second web browser, also pointed to http://localhost:1565 and do the same. Note
+that the two agents do not interfere with one another.
+
+3. To suggest to an agent that it migrate, enter the string "migrate"
+in the text box and submit. The agent will migrate to a new port, but keep its old state.
+
+-----------------------------------------------------------------------------------
+
+COMMENTS:
+
+This is a simple framework for hosting agents that can migrate from
+one server and port, to another server and port. For the example, the
+server is always localhost, but the code would work the same on
+different, and multiple, hosts.
+
+State is implemented simply as an integer that is incremented. This represents the state
+of the animal game for some agent.
+
+The example uses a standard, default, HostListener port of 1565.
+
+-----------------------------------------------------------------------------------
+
+DESIGN OVERVIEW
+
+Here is the high-level design, more or less:
+
+HOST SERVER
+  Runs on some machine
+  Port counter is just a global integer incrememented after each assignment
+  Loop:
+    Accept connection with a request for hosting
+    Spawn an Agent Looper/Listener with the new, unique, port
+
+AGENT LOOPER/LISTENER
+  Make an initial state, or accept an existing state if this is a migration
+  Get an available port from this host server
+  Set the port number back to the client which now knows IP address and port of its
+         new home.
+  Loop:
+    Accept connections from web client(s)
+    Spawn an agent worker, and pass it the state and the parent socket blocked in this loop
+  
+AGENT WORKER
+  If normal interaction, just update the state, and pretend to play the animal game
+  (Migration should be decided autonomously by the agent, but we instigate it here with client)
+  If Migration:
+    Select a new host
+    Send server a request for hosting, along with its state
+    Get back a new port where it is now already living in its next incarnation
+    Send HTML FORM to web client pointing to the new host/port.
+    Wake up and kill the Parent AgentLooper/Listener by closing the socket
+    Die
+
+WEB CLIENT
+  Just a standard web browser pointing to http://localhost:1565 to start.
+
+----------------------------------------------------------------------*/

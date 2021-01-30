@@ -1,0 +1,240 @@
+> AllStart.bat 
+
+C:\BC>start java bc 0 
+
+C:\BC>start java bc 1 
+
+C:\BC>java bc 2
+
+Running now
+
+Clark Elliott's Block Coordination Framework. Use Control-C to stop the
+process.
+
+Using processID 2
+
+Starting Key Server input thread using 8050
+Starting the Unverified Block Server input thread using 8051
+Starting the Blockchain server input thread using 8052
+Got key: FakeKeyProcess2
+Got key: FakeKeyProcess1
+Got key: FakeKeyProcess0
+Sending UVBs to process 0...
+Sending UVBs to process 1...
+Received UVB:  2020-10-04.23:02:24.1 (Block#21 from P1)
+Received UVB:  2020-10-04.23:02:24.0 (Block#20 from P1)
+Received UVB:  2020-10-04.23:02:24.3 (Block#23 from P1)
+Received UVB:  2020-10-04.23:02:24.2 (Block#22 from P1)
+Sending UVBs to process 2...
+Received UVB:  2020-10-04.23:02:24.0 (Block#10 from P0)
+Received UVB:  2020-10-04.23:02:24.0 (Block#30 from P2)
+Received UVB:  2020-10-04.23:02:24.3 (Block#13 from P0)
+Received UVB:  2020-10-04.23:02:24.3 (Block#33 from P2)
+Received UVB:  2020-10-04.23:02:24.2 (Block#12 from P0)
+Received UVB:  2020-10-04.23:02:24.2 (Block#32 from P2)
+Received UVB:  2020-10-04.23:02:24.1 (Block#11 from P0)
+Received UVB:  2020-10-04.23:02:24.1 (Block#31 from P2)
+         --NEW BLOCKCHAIN--
+
+[(Block#20 from P1) verified by P1 at time 786]
+[First block]
+
+
+         --NEW BLOCKCHAIN--
+
+[(Block#30 from P2) verified by P0 at time 933]
+
+[(Block#20 from P1) verified by P1 at time 786]
+[First block]
+
+
+Starting the Unverified Block Priority Queue Consumer thread.
+
+         --NEW BLOCKCHAIN--
+
+[(Block#10 from P0) verified by P1 at time 626]
+
+[(Block#30 from P2) verified by P0 at time 933]
+
+[(Block#20 from P1) verified by P1 at time 786]
+[First block]
+
+
+         --NEW BLOCKCHAIN--
+
+[(Block#21 from P1) verified by P2 at time 338]
+
+[(Block#10 from P0) verified by P1 at time 626]
+
+[(Block#30 from P2) verified by P0 at time 933]
+
+[(Block#20 from P1) verified by P1 at time 786]
+[First block]
+
+
+         --NEW BLOCKCHAIN--
+
+[(Block#11 from P0) verified by P2 at time 800]
+
+[(Block#21 from P1) verified by P2 at time 338]
+
+[(Block#10 from P0) verified by P1 at time 626]
+
+[(Block#30 from P2) verified by P0 at time 933]
+
+[(Block#20 from P1) verified by P1 at time 786]
+[First block]
+
+
+         --NEW BLOCKCHAIN--
+
+[(Block#31 from P2) verified by P1 at time 630]
+
+[(Block#11 from P0) verified by P2 at time 800]
+
+[(Block#21 from P1) verified by P2 at time 338]
+
+[(Block#10 from P0) verified by P1 at time 626]
+
+[(Block#30 from P2) verified by P0 at time 933]
+
+[(Block#20 from P1) verified by P1 at time 786]
+[First block]
+
+
+         --NEW BLOCKCHAIN--
+
+[(Block#12 from P0) verified by P2 at time 926]
+
+[(Block#31 from P2) verified by P1 at time 630]
+
+[(Block#11 from P0) verified by P2 at time 800]
+
+[(Block#21 from P1) verified by P2 at time 338]
+
+[(Block#10 from P0) verified by P1 at time 626]
+
+[(Block#30 from P2) verified by P0 at time 933]
+
+[(Block#20 from P1) verified by P1 at time 786]
+[First block]
+
+
+         --NEW BLOCKCHAIN--
+
+[(Block#32 from P2) verified by P1 at time 601]
+
+[(Block#12 from P0) verified by P2 at time 926]
+
+[(Block#31 from P2) verified by P1 at time 630]
+
+[(Block#11 from P0) verified by P2 at time 800]
+
+[(Block#21 from P1) verified by P2 at time 338]
+
+[(Block#10 from P0) verified by P1 at time 626]
+
+[(Block#30 from P2) verified by P0 at time 933]
+
+[(Block#20 from P1) verified by P1 at time 786]
+[First block]
+
+
+         --NEW BLOCKCHAIN--
+
+[(Block#22 from P1) verified by P2 at time 499]
+
+[(Block#32 from P2) verified by P1 at time 601]
+
+[(Block#12 from P0) verified by P2 at time 926]
+
+[(Block#31 from P2) verified by P1 at time 630]
+
+[(Block#11 from P0) verified by P2 at time 800]
+
+[(Block#21 from P1) verified by P2 at time 338]
+
+[(Block#10 from P0) verified by P1 at time 626]
+
+[(Block#30 from P2) verified by P0 at time 933]
+
+[(Block#20 from P1) verified by P1 at time 786]
+[First block]
+
+
+         --NEW BLOCKCHAIN--
+
+[(Block#23 from P1) verified by P1 at time 319]
+
+[(Block#22 from P1) verified by P2 at time 499]
+
+[(Block#32 from P2) verified by P1 at time 601]
+
+[(Block#12 from P0) verified by P2 at time 926]
+
+[(Block#31 from P2) verified by P1 at time 630]
+
+[(Block#11 from P0) verified by P2 at time 800]
+
+[(Block#21 from P1) verified by P2 at time 338]
+
+[(Block#10 from P0) verified by P1 at time 626]
+
+[(Block#30 from P2) verified by P0 at time 933]
+
+[(Block#20 from P1) verified by P1 at time 786]
+[First block]
+
+
+         --NEW BLOCKCHAIN--
+
+[(Block#13 from P0) verified by P2 at time 362]
+
+[(Block#23 from P1) verified by P1 at time 319]
+
+[(Block#22 from P1) verified by P2 at time 499]
+
+[(Block#32 from P2) verified by P1 at time 601]
+
+[(Block#12 from P0) verified by P2 at time 926]
+
+[(Block#31 from P2) verified by P1 at time 630]
+
+[(Block#11 from P0) verified by P2 at time 800]
+
+[(Block#21 from P1) verified by P2 at time 338]
+
+[(Block#10 from P0) verified by P1 at time 626]
+
+[(Block#30 from P2) verified by P0 at time 933]
+
+[(Block#20 from P1) verified by P1 at time 786]
+[First block]
+
+
+         --NEW BLOCKCHAIN--
+
+[(Block#33 from P2) verified by P2 at time 784]
+
+[(Block#13 from P0) verified by P2 at time 362]
+
+[(Block#23 from P1) verified by P1 at time 319]
+
+[(Block#22 from P1) verified by P2 at time 499]
+
+[(Block#32 from P2) verified by P1 at time 601]
+
+[(Block#12 from P0) verified by P2 at time 926]
+
+[(Block#31 from P2) verified by P1 at time 630]
+
+[(Block#11 from P0) verified by P2 at time 800]
+
+[(Block#21 from P1) verified by P2 at time 338]
+
+[(Block#10 from P0) verified by P1 at time 626]
+
+[(Block#30 from P2) verified by P0 at time 933]
+
+[(Block#20 from P1) verified by P1 at time 786]
+[First block]
