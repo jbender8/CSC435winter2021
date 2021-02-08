@@ -1,6 +1,6 @@
 /*--------------------------------------------------------
 
-1. Name / Date: Jessica Bender / Version 1: Febuary 7th 2021 11:58am
+1. Name / Date: Jessica Bender / Version 2: Febuary 7th 2021 5:44pm
 
 2. Java version used, if not the official version for the class:
 
@@ -17,10 +17,16 @@ Java HotSpot(TM) 64-Bit Server VM (build 9.0.4+11, mixed mode)
 
 4. Precise examples / instructions to run this program:
 
+>java MiniWebserver
+
+enter name and 2 numbers into WebAdd.html hit submit 
+go to http://localhost:2540/abc.
+
 5. List of files needed for running the program.
 
 
  a. MiniWebserver.java
+ b. WebAdd.html
 
 6. Notes:
 
@@ -48,7 +54,7 @@ There are no specification on how to deplay the text. Thus all the text would be
 
 
 import java.io.*;  //imports all directories located in java.io 
-import java.net.*; //imports all directories located in java.io 
+import java.net.*; //imports all directories located in java.net
 
 class ListenWorker extends Thread {  //start of ListenWorker class
   Socket sock; //new Socket called sock
@@ -61,20 +67,42 @@ class ListenWorker extends Thread {  //start of ListenWorker class
       in = new BufferedReader //makes a new BufferedReader and assigns it to in
         (new InputStreamReader(sock.getInputStream())); //gets the InputStream from the Socket sock and makes a new InputStreamReader and puts in inside the BufferedReader in
       System.out.println("Sending the HTML Reponse now: " +
-			 Integer.toString(WebResponse.i) + "\n" );
+			 Integer.toString(MiniWebserver.i) + "\n" );
            String HTMLResponse = "<html> <h1> Hello Browser World! " +
-	     Integer.toString(WebResponse.i++) +  "</h1> <p><p> <hr> <p>";
+	     Integer.toString(MiniWebserver.i++) +  "</h1> <p><p> <hr> <p>";
       out.println("HTTP/1.1 200 OK");
       out.println("Connection: close"); 
       out.println("Content-Length: 400"); 
       out.println("Content-Type: text/html \r\n\r\n");
-      out.println(HTMLResponse);
+      out.println(HTMLResponse); //prints HTMLResponse
+      String url = in.readLine(); //reads in and sets it to string variable url                                                                // local definition of socketData of type String
+      String equ = "="; // new string called equ and is set to =
+      String and = "&"; // new string called and and is set to &
+      url = url.replaceAll(and, equ); //replaces all & with = in url
+      String HTTP = " HTTP"; //new string called HTTP and is set to HTTP
+      url = url.replaceAll(HTTP, equ); //replaces all HTTP with = in url
+      String split[] = url.split("="); //splits url by the =
+      String name = split[1]; // gets the name from the split at index 1
+      String num1 = split[3]; // gets the first from the split at index 3
+      String num2 = split[5];// gets the second number from the split at index 5
+      int sum = Integer.parseInt(num1) + Integer.parseInt(num2);// add num1 and num2
+      //int x =Integer.parseInt(num1);
+      //int y =Integer.parseInt(num2);
+      //int summ = x + y;
+      //out.println(summ);
+      String hello = "<html> <h2> Hello " + name + " the sum of "+ num1 +" and " + num2 + " is " + sum +
+	    "</h2> <p><p> <hr> <p>"; //prints the user
+      out.println(hello);
+      //out.println(hello);
+
+
+
+
 
       for(int j=0; j<6; j++){ 
 	out.println(in.readLine() + "<br>\n"); 
       } //closes for statement 
       out.println("</html>"); //prints message to PrintStream out
-	
       sock.close(); // close the connection to the Socket sock, but does not colose the connecton to the server;
     } //closes try statement 
     catch (IOException x) { //start catch. Catches an IOException if the try fails.
@@ -95,7 +123,7 @@ public class MiniWebserver { //start of MiniWebserver class. This is a public cl
   
       ServerSocket servsock = new ServerSocket(port, q_len); //new ServerSocket called servsock. also sets it equal to the port and q_len that we se above 
   
-      System.out.println("Jess Bender's WebResponse running at " + port + ".");//Prints statement. Changed code to have my name and changed the statement so that the variable port would be printed and it was not hardcoded in the string statement. 
+      System.out.println("Jess Bender's MiniWebserver running at " + port + ".");//Prints statement. Changed code to have my name and changed the statement so that the variable port would be printed and it was not hardcoded in the string statement. 
       System.out.println("Point Firefox browser to http://localhost:2540/abc.\n");//prints message
       while (true) { //starts wile true statement to look for the next client connection
         sock = servsock.accept(); 
