@@ -64,6 +64,7 @@ import java.text.*;
 import java.util.Base64;
 import java.util.Arrays;
 
+import com.google.*;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
@@ -86,7 +87,7 @@ import java.io.Reader;
 -----------------------------------------------------------------------------------------------------*/
 
 class BlockRecord {
-    /* Examples of block fields. You should pick, and justify, your own set: */
+    // Examples of block fields. You should pick, and justify, your own set: 
     String BlockID;
     String VerificationProcessID;
     String PreviousHash; // We'll copy from previous block
