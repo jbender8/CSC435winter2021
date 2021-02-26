@@ -22,7 +22,7 @@ In separate shell windows:
 5. List of files needed for running the program.
 
  a. Blockchain.Java
- 
+
 6. Notes:
 
 Ample help from provided code given in class and the below web sources that were given in the sample code.
@@ -44,3 +44,10 @@ import java.text.*;
 import java.security.*;
 import java.io.*;
 import java.util.*;
+
+public class Blockchain{
+
+    public static void main(String[] args) {
+        
+    }
+}
