@@ -65,7 +65,11 @@ public class Blockchain{
             ProcessID = 0;
             Ports.set(ProcessID);
         }
-        System.out.print(ProcessID);
+        System.out.println(ProcessID);
+        System.out.println(Ports.getkeyPort());
+        System.out.println(Ports.getunverifiedPort());
+        System.out.println(Ports.getupdatedPort());
+
         
     }
 }
@@ -79,6 +83,16 @@ class Ports{
         unverifiedPort = unverifiedPort + ID;
         updatedPort = updatedPort + ID;
     }
+    public static int getkeyPort(){
+        return keyPort;
+    }
+    public static int getunverifiedPort(){
+        return unverifiedPort;
+    }
+    public static int getupdatedPort(){
+        return updatedPort;
+    }
+
 }
 
 class BlockRecord {
