@@ -43,34 +43,42 @@ https://www.java67.com/2014/10/how-to-pad-numbers-with-leading-zeroes-in-Java-ex
 import java.text.*;
 import java.security.*;
 import java.io.*;
+import java.net.ServerSocket;
+import java.net.Socket;
 import java.util.*;
 
 public class Blockchain{
 
     public static void main(String[] args) {
         int ProcessID = 0;
+        String InputFile = "";
         if (args[0].equals("0")){
             ProcessID = 0;
             Ports.set(ProcessID);
+            InputFile = "BlockInput0";
         }
         else if (args[0].equals("1")){
             ProcessID = 1;
             Ports.set(ProcessID);
+            InputFile = "BlockInput1";
         }
         else if (args[0].equals("2")){
             ProcessID = 2;
             Ports.set(ProcessID);
+            InputFile = "BlockInput2";
+            new Thread(new threada()).start();
+
         }
         else{
             ProcessID = 0;
             Ports.set(ProcessID);
+            InputFile = "BlockInput0";
         }
-        System.out.println(ProcessID);
-        System.out.println(Ports.getkeyPort());
-        System.out.println(Ports.getunverifiedPort());
-        System.out.println(Ports.getupdatedPort());
-
-        
+        System.out.println("Process ID #: "+ProcessID);
+        System.out.println("Public Key Port: "+Ports.getkeyPort());
+        System.out.println("Unverified Block Port: "+Ports.getunverifiedPort());
+        System.out.println("Updated Blockchain Port: "+Ports.getupdatedPort()); 
+        System.out.println(InputFile); 
     }
 }
 
@@ -216,6 +224,17 @@ class BlockRecord {
 
 }
 
-class unverified extends Thread{
-
+class threada implements Runnable{
+    public void run(){
+        Socket sock;
+        ServerSocket seversock;
+    
+        try{//trys the following code, if fails jumps to catch.
+            seversock = new ServerSocket(1591,100); //assigns sock toa new Socket with serverName and the port 1581
+            while(true){
+                sock = seversock.accept();
+            }
+        }
+        catch (IOException x) {x.printStackTrace ();} //catches IOExeption when try fails and prints the error.
+    }
 }
