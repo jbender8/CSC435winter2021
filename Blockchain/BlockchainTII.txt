@@ -1,3 +1,25 @@
+C:\Users\jessi\Documents\2020-2021 school\Winter\CSC435winter2021\Blockchain>java Blockchain 1
+Process ID #: 1
+Public Key Port: 4711
+Unverified Block Port: 4821
+Updated Blockchain Port: 4931
+Input File: BlockInput1.txt
+java.net.ConnectException: Connection refused: connect
+        at java.base/java.net.DualStackPlainSocketImpl.connect0(Native Method)
+        at java.base/java.net.DualStackPlainSocketImpl.socketConnect(DualStackPlainSocketImpl.java:79)
+        at java.base/java.net.AbstractPlainSocketImpl.doConnect(AbstractPlainSocketImpl.java:400)
+        at java.base/java.net.AbstractPlainSocketImpl.connectToAddress(AbstractPlainSocketImpl.java:243)
+        at java.base/java.net.AbstractPlainSocketImpl.connect(AbstractPlainSocketImpl.java:225)
+        at java.base/java.net.PlainSocketImpl.connect(PlainSocketImpl.java:148)
+        at java.base/java.net.SocksSocketImpl.connect(SocksSocketImpl.java:402)
+        at java.base/java.net.Socket.connect(Socket.java:591)
+        at java.base/java.net.Socket.connect(Socket.java:540)
+        at java.base/java.net.Socket.<init>(Socket.java:436)
+        at java.base/java.net.Socket.<init>(Socket.java:213)
+        at getBlocks.input(Blockchain.java:128)
+        at Blockchain.main(Blockchain.java:80)
+
+C:\Users\jessi\Documents\2020-2021 school\Winter\CSC435winter2021\Blockchain>
 /*--------------------------------------------------------
 
 1. Name / Date: Jessica Bender / version 1 - 2/22/2021
@@ -80,11 +102,7 @@ public class Blockchain{ //start blockchain class
         System.out.println("Unverified Block Port: "+Ports.getunverifiedPort()); // prints Unverified Block Port
         System.out.println("Updated Blockchain Port: "+Ports.getupdatedPort()); //prints Updated Blockchain Port
         System.out.println("Input File: "+InputFile); //prints InputFile
-        try{
-            getBlocks.input(InputFile, ProcessID);
-        }
-        catch (Exception x) {x.printStackTrace ();} //catches IOExeption when try fails and prints the error.
-
+        getBlocks.input(InputFile, ProcessID);
     }
 }
 
@@ -283,6 +301,5 @@ class BlockRecord {//BlockRecord class
         this.WinningHash = WH;//sets WinningHash to WH
     }
 
-}//end BlockRecord class
-
+}
 
