@@ -224,6 +224,9 @@ This class is also made as a call in the AgentListener class
 
 /* 
 Notes on agentHolder class:
+This is a simple class that allows other classes to call agentHolder and takes in a ServerSocket. 
+It also has a int agentState initialized. that other classes call to.
+This class is used in the AgentWorker class and the AgentListener class. 
 */
   
   class agentHolder { //start of class agentHolder
