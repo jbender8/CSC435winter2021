@@ -90,6 +90,10 @@ WEB CLIENT
 /* 
 Ran the progam and connected to http:\\localhost:4242 on Google Chrome browser.
 Minor code changes I made: 
+    1. added on line ___:
+        System.out.println("With small edits and comments from Jessica Bender. 3/7/2021");//added this text to show that this is my comments and small changes
+    2. 
+
 
 Logs: 
     example with 1 chrome browser open 
@@ -130,9 +134,9 @@ This class is also made as a call in the AgentListener class
 
   class AgentWorker extends Thread {//start of the AgentWorker class 
       
-    Socket sock; //new Socket connection called sock
+    Socket sock; //new Socket connection called sock initialized.
     agentHolder parentAgentHolder; //calls to the agentHolder class within the code. assigns it to parentAgentHolder
-    int localPort; 
+    int localPort;//new int localPort initialized.
     
     AgentWorker (Socket s, int prt, agentHolder ah) { //start of AgentWorker. Takes in a Socket, and int and an agentHolder
       sock = s; //assigns the Soccet s that was given in the funtion call to the Socket sock that we inilized above 
@@ -223,9 +227,11 @@ Notes on agentHolder class:
 */
   
   class agentHolder { //start of class agentHolder
-    ServerSocket sock;
-    int agentState;
-    agentHolder(ServerSocket s) { sock = s;}
+    ServerSocket sock;// new ServerSocket called sock initialized.
+    int agentState;//new int called agentState initialized.
+    agentHolder(ServerSocket s) {//start of agentHolder call. Takes in a ServerSocket. 
+        sock = s; //assigns the ServerSocket Sock to the ServerSocket s that was taken in 
+    }// end of agentHolder call
   }//clases class agentHolder
   
 /* 
