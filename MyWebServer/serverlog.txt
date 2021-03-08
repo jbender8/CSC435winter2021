@@ -1,0 +1,28 @@
+C:\Users\jessi\Documents\2020-2021 school\Winter\CSC435winter2021\MyWebServer>java MyWebServer
+Jess Bender's MyWebServer running at 2540.
+Point Firefox browser to http://localhost:2540/
+
+The file in use is: /. This files MIME-Type is:text/html.
+The Directory in use is: /. This directory's MIME-Type is:text/html.
+<html> <h1> Hello Directory!</h1> <p><p> <hr> <p>Directory: /<p><p>click on here to reload to main page (points to http://localhost:2540/) :<a href="http://localhost:2540/"><u>HERE</u></a> <p><p><a href="Bender_Webserver.zip" >Bender_Webserver.zip</a> <p><p><a href="cat.html" >cat.html</a> <p><p><a href="dog.txt" >dog.txt</a> <p><p><a href="DS 435 -- Elliott Web Server Tips __center_.html" >DS 435 -- Elliott Web Server Tips __center_.html</a> <p><p><a href="http-streams.txt" >http-streams.txt</a> <p><p><a href="ListenWorker.class" >ListenWorker.class</a> <p><p><a href="MyListener.java.txt" >MyListener.java.txt</a> <p><p><a href="MyTelnetClient.java.txt" >MyTelnetClient.java.txt</a> <p><p><a href="MyWebServer Checklist.html" >MyWebServer Checklist.html</a> <p><p><a href="MyWebServer.class" >MyWebServer.class</a> <p><p><a href="MyWebServer.java" >MyWebServer.java</a> <p><p><a href="ReadFiles.java.txt" >ReadFiles.java.txt</a> <p><p><a href="serverlog.txt" >serverlog.txt</a> <p><p><a href="test.class" >test.class</a> <p><p><a href="test.java" >test.java</a> <p><p><a href="WebAdd.html" >WebAdd.html</a> <p><p><a href="WebServerTII.docx" >WebServerTII.docx</a> <p><p><a href="WebServerWorker.class" >WebServerWorker.class</a> <p><p><a href="~$bServerTII.docx" >~$bServerTII.docx</a> <p><p>The file in use is: /cat.html. This files MIME-Type is:text/html.
+The file in use is: cat.html. This files MIME-Type is:text/html. the length is: 132.
+<html> <body>
+<center>
+
+<h1> This is Elliott's </h1>
+
+<h1>  CAT </h1>
+
+<h1> html file </h1>
+
+</center>
+</body> </html>
+The file in use is: /dog.txt. This files MIME-Type is:text/plain.
+The file in use is: dog.txt. This files MIME-Type is:text/plain. the length is: 49.
+This is Elliott's dog file on condor. Good job!
+Exception in thread "Thread-3" java.lang.NullPointerException
+        at java.base/java.util.StringTokenizer.<init>(StringTokenizer.java:199)
+        at java.base/java.util.StringTokenizer.<init>(StringTokenizer.java:221)
+        at ListenWorker.run(MyWebServer.java:72)
+
+
