@@ -15,9 +15,9 @@ Java HotSpot(TM) 64-Bit Server VM (build 9.0.4+11, mixed mode)
 4. Precise examples / instructions to run this program:
 In separate shell windows:
 
-> java JokeServer
-> java JokeClient
-> java JokeClientAdmin
+> java Blockchain 0
+> java Blockchain 1
+> java Blockchain 2
 
 5. List of files needed for running the program.
 
@@ -48,6 +48,160 @@ import java.util.*;
 public class Blockchain{
 
     public static void main(String[] args) {
+        int ProcessID = 0;
+        if (args[0].equals("0")){
+            ProcessID = 0;
+            Ports.set(ProcessID);
+        }
+        else if (args[0].equals("1")){
+            ProcessID = 1;
+            Ports.set(ProcessID);
+        }
+        else if (args[0].equals("2")){
+            ProcessID = 2;
+            Ports.set(ProcessID);
+        }
+        else{
+            ProcessID = 0;
+            Ports.set(ProcessID);
+        }
+        System.out.print(ProcessID);
         
     }
+}
+
+class Ports{
+    static int keyPort = 4710;
+    static int unverifiedPort = 4820;
+    static int updatedPort  = 4930;
+    public static void set(int ID){
+        keyPort = keyPort + ID;
+        unverifiedPort = unverifiedPort + ID;
+        updatedPort = updatedPort + ID;
+    }
+}
+
+class BlockRecord {
+    String BlockID;
+    String VerificationProcessID;
+    String PreviousHash; 
+    UUID uuid;
+    String Fname;
+    String Lname;
+    String SSNum;
+    String DOB;
+    String Diag;
+    String Treat;
+    String Rx;
+    String RandomSeed; 
+    String WinningHash;
+
+    public String getBlockID() {
+        return BlockID;
+    }
+
+    public void setBlockID(String BID) {
+        this.BlockID = BID;
+    }
+
+    public String getVerificationProcessID() {
+        return VerificationProcessID;
+    }
+
+    public void setVerificationProcessID(String VID) {
+        this.VerificationProcessID = VID;
+    }
+
+    public String getPreviousHash() {
+        return this.PreviousHash;
+    }
+
+    public void setPreviousHash(String PH) {
+        this.PreviousHash = PH;
+    }
+
+    public UUID getUUID() {
+        return uuid;
+    } 
+
+    public void setUUID(UUID ud) {
+        this.uuid = ud;
+    }
+
+    public String getLname() {
+        return Lname;
+    }
+
+    public void setLname(String LN) {
+        this.Lname = LN;
+    }
+
+    public String getFname() {
+        return Fname;
+    }
+
+    public void setFname(String FN) {
+        this.Fname = FN;
+    }
+
+    public String getSSNum() {
+        return SSNum;
+    }
+
+    public void setSSNum(String SS) {
+        this.SSNum = SS;
+    }
+
+    public String getDOB() {
+        return DOB;
+    }
+
+    public void setDOB(String RS) {
+        this.DOB = RS;
+    }
+
+    public String getDiag() {
+        return Diag;
+    }
+
+    public void setDiag(String D) {
+        this.Diag = D;
+    }
+
+    public String getTreat() {
+        return Treat;
+    }
+
+    public void setTreat(String Tr) {
+        this.Treat = Tr;
+    }
+
+    public String getRx() {
+        return Rx;
+    }
+
+    public void setRx(String Rx) {
+        this.Rx = Rx;
+    }
+
+    public String getRandomSeed() {
+        return RandomSeed;
+    }
+
+    public void setRandomSeed(String RS) {
+        this.RandomSeed = RS;
+    }
+
+    public String getWinningHash() {
+        return WinningHash;
+    }
+
+    public void setWinningHash(String WH) {
+        this.WinningHash = WH;
+    }
+
+}
+
+class unverified extends Thread{
+
 }
