@@ -85,180 +85,161 @@ WEB CLIENT
 
   -------------------------------------------------------------------------------*/
 
+  //---------------------------------------------Start of new comments By Jessica Bender-----------------------------------------------------------------------------------------------------
 
-  import java.io.BufferedReader;
-  import java.io.IOException;
-  import java.io.InputStreamReader;
-  import java.io.PrintStream;
-  import java.net.ServerSocket;
-  import java.net.Socket;
-  /**
-   * HostServer Notes: This went pretty smoothly for me, although I did have to edit the HTML functions
-   * to get an accurate content length so things would be compatible with browsers other than IE. I also modified
-   * things to eliminate inaccurate state numbers based on fav.ico requests. If the string person wasnt found,
-   * the requests was ignored
-   */
-  
-  /**
-   * AgentWorker
-   * 
-   * AgentWorker objects are created by AgentListeners and process requests made at the various
-   * active ports occupied by agentlistener objects. They take a request and look for the string
-   * migrate in that request(supplied from a get parameter via an html form). If migrate is found, 
-   * the worker finds the next availabel port and switches teh client to it. 
-   * 
-   * I made a small modification because my browser kept requesting fav.ico. So I verified that we receive
-   * a person attribute before processing the request as valid(and incrementing agent state)
-   *
-   */
-  class AgentWorker extends Thread {
+/* 
+Ran the progam and connected to http:\\localhost:4242 on Google Chrome browser.
+Minor code changes I made: 
+
+Logs: 
+    example with 1 chrome browser open 
+        Line 
+    example with 3 chrome browsers open        
+        Line 
+    example with my code edits :)        
+        Line 
+*/
+
+/* 
+Notes on imports: I simplified the imports with *. 
+We only need io and net imports for this program to work.
+*/
+  //import java.io.BufferedReader;
+  //import java.io.IOException;
+ // import java.io.InputStreamReader;
+ // import java.io.PrintStream;
+  import java.io.*; // Added this import to simplify the other commented out imports. This allows us to have only one inport rather then 4 imports 
+  //import java.net.ServerSocket;
+  //import java.net.Socket;
+  import java.net.*;// Also Added this import to simplify the other commented out imports. This allows us to have only one inport rather then 2 imports.
+ 
+ /* 
+Notes on AgentWorker class:
+the main functionality of this class is to read what was inputed in the text box and do something with it.
+For example if it was migrate it printed on the webpage: 
+    We are migrating to host 3006
+    View the source of this page to see how the client is informed of the new location.
+Whease as if anything else was endtered it printed on the webpage: 
+    We are having a conversation with state 12
+And if there was an error, or incorrect input it printed on the webpage: 
+    You have not entered a valid request!
+
+This class also made a few other calls to other classes. i.e. agentHolder and AgentListener. 
+This class is also made as a call in the AgentListener class
+*/
+
+  class AgentWorker extends Thread {//start of the AgentWorker class 
       
-    Socket sock; //connection to client
-    agentHolder parentAgentHolder; //maintains agentstate holding socket and state counter
-    int localPort; //port being used by this request
+    Socket sock; //new Socket connection called sock
+    agentHolder parentAgentHolder; //calls to the agentHolder class within the code. assigns it to parentAgentHolder
+    int localPort; 
     
-    //basic constructor
-    AgentWorker (Socket s, int prt, agentHolder ah) {
-      sock = s;
-      localPort = prt;
-      parentAgentHolder = ah;
+    AgentWorker (Socket s, int prt, agentHolder ah) { //start of AgentWorker. Takes in a Socket, and int and an agentHolder
+      sock = s; //assigns the Soccet s that was given in the funtion call to the Socket sock that we inilized above 
+      localPort = prt; // assigns the int prt that was given in the funtion call to the int localPort that we inilized above 
+      parentAgentHolder = ah;// assigns the agentHolder ah that was given in the funtion call to the agentHolder parentAgentHolder that we inilized above 
     }
-    public void run() {
+    public void run() {//start of run
       
-      //initialize variables
-      PrintStream out = null;
-      BufferedReader in = null;
-      //server is hardcoded in, only acceptable for this basic implementation
-      String NewHost = "localhost";
-      //port the main worker will run on
-      int NewHostMainPort = 4242;		
-      String buf = "";
-      int newPort;
-      Socket clientSock;
-      BufferedReader fromHostServer;
-      PrintStream toHostServer;
+      PrintStream out = null; //new PrintStream called out assigned to null
+      BufferedReader in = null;//new BufferedReader called in assigned to null
+      String NewHost = "localhost"; //new Sting called NewHost assigned to localhost
+      int NewHostMainPort = 4242;//port that we will be running on. Int called NewHostMainPort and assigned to 4242
+      String buf = "";  //new Sting called buf assigned to an empty sting 
+      int newPort; //new int called newPort initialized. 
+      Socket clientSock; //new Socket called clientSock initialized. 
+      BufferedReader fromHostServer; //new BufferedReader called fromHostServer initialized. 
+      PrintStream toHostServer; //new PrintStream called toHostServer initialized. 
       
-      try {
-        out = new PrintStream(sock.getOutputStream());
-        in = new BufferedReader(new InputStreamReader(sock.getInputStream()));
+      try { //start of try. Will try the following code. If it fails it will jump to the catch. 
+        out = new PrintStream(sock.getOutputStream()); //new PrintStream that gets the Output Stream from sock and assigns it to out. 
+        in = new BufferedReader(new InputStreamReader(sock.getInputStream())); //new BufferedReader and new InputStreamReader that gets the Input Stream from sock and assigns it to in. 
         
-        //read a line from the client
-        String inLine = in.readLine();
-        //to allow for usage on non-ie browsers, I had to accurately determine the content
-        //length and as a result need to build the html response so i can determine its length.
-        StringBuilder htmlString = new StringBuilder();
+        String inLine = in.readLine(); //reads each line of in. Assigns it to new string called inLine
+        StringBuilder htmlString = new StringBuilder(); //new StringBuilder assigned to a new StringBuilder variable called htmlString. A StringBuilder is an editable string. or a seqance or chars that can be edited. 
         
-        //log a request
-        System.out.println();
-        System.out.println("Request line: " + inLine);
+        System.out.println(); //prints a blank line
+        System.out.println("Request line: " + inLine); // prints Request line: + what is stored in inLine. (ie: Request line: GET /?person=YourTextInput HTTP/1.1)
         
-        if(inLine.indexOf("migrate") > -1) {
-      //the supplied request contains migrate, switch the user to a new port
+        if(inLine.indexOf("migrate") > -1) {//if statement to see the user entered migrate
+            clientSock = new Socket(NewHost, NewHostMainPort); //new Socket that takes in the the string NewHost that is assigned to localhost and an int NewHostMainPort that is assigned to 4242
+            fromHostServer = new BufferedReader(new InputStreamReader(clientSock.getInputStream()));
+            toHostServer = new PrintStream(clientSock.getOutputStream()); //new PrintStream that takes in the Ouput Stream of clientSock. Then assigns it to toHostServer
+            toHostServer.println("Please host me. Send my port! [State=" + parentAgentHolder.agentState + "]");// prints Please host me. Send my port! [State= + the agentHolder parentAgentHolder.agentState. agentState is a int that gets added later in the code.
+            //example of what would be printed: Please host me. Send my port! [State=0]
+            toHostServer.flush(); //flushes PrintStream toHostServer
+            for(;;) {//for statement
+                buf = fromHostServer.readLine(); //read lines from fromHostServer and assign it to buf
+                if(buf.indexOf("[Port=") > -1) {//checks to see if buf the index of [Port= is greater than or = to 0
+                    break;//breaks if true
+                }//closes if
+            }//end of for
       
-      //create a new socket with the main server waiting on 4242
-      clientSock = new Socket(NewHost, NewHostMainPort);
-      fromHostServer = new BufferedReader(new InputStreamReader(clientSock.getInputStream()));
-      //send a request to port 4242 to receive the next open port
-      toHostServer = new PrintStream(clientSock.getOutputStream());
-      toHostServer.println("Please host me. Send my port! [State=" + parentAgentHolder.agentState + "]");
-      toHostServer.flush();
-      
-      //wait for the response and read a response until we find what should be a port
-      for(;;) {
-        //read the line and check it for what looks to be a valid port
-        buf = fromHostServer.readLine();
-        if(buf.indexOf("[Port=") > -1) {
-          break;
-        }
-      }
-      
-      //extract the port by leveraging the format of the port response
-      String tempbuf = buf.substring( buf.indexOf("[Port=")+6, buf.indexOf("]", buf.indexOf("[Port=")) );
-      //parse the response for the integer containing the new port
-      newPort = Integer.parseInt(tempbuf);
-      //log it to the server console
-      System.out.println("newPort is: " + newPort);
-      
-      //prepare the html response to send the user
-      htmlString.append(AgentListener.sendHTMLheader(newPort, NewHost, inLine));
-      //inform the user that the migration request was received
-      htmlString.append("<h3>We are migrating to host " + newPort + "</h3> \n");
-      htmlString.append("<h3>View the source of this page to see how the client is informed of the new location.</h3> \n");
-      //finish html
-      htmlString.append(AgentListener.sendHTMLsubmit());
-      
-      //log that we are killing the waiting server at the port
-      System.out.println("Killing parent listening loop.");
-      //grab the socket at the old port(stored in the parentAgentHolder)
-      ServerSocket ss = parentAgentHolder.sock;
-      //close the port
-      ss.close();
-      
-      
-        } else if(inLine.indexOf("person") > -1) {
-      //increment the state int to reflect an event occuring in the 'game'
-      parentAgentHolder.agentState++;
-      //send the html back to the user displaying the agent state and form
-      htmlString.append(AgentListener.sendHTMLheader(localPort, NewHost, inLine));
-      htmlString.append("<h3>We are having a conversation with state   " + parentAgentHolder.agentState + "</h3>\n");
-      htmlString.append(AgentListener.sendHTMLsubmit());
-      
-        } else {
-      //we couldnt find a person variable, so we probably are looking at a fav.ico request
-      //tell the user it was invalid
-      htmlString.append(AgentListener.sendHTMLheader(localPort, NewHost, inLine));
-      htmlString.append("You have not entered a valid request!\n");
-      htmlString.append(AgentListener.sendHTMLsubmit());		
-      
-      
-        }
-        //output the html
-        AgentListener.sendHTMLtoStream(htmlString.toString(), out);
-        
-        //close the socket
-        sock.close();
-        
-        
-      } catch (IOException ioe) {
-        System.out.println(ioe);
-      }
-    }
-    
-  }
+            String tempbuf = buf.substring( buf.indexOf("[Port=")+6, buf.indexOf("]", buf.indexOf("[Port=")) ); //new string called tempbuf 
+            //tempbuf takes buf's substring of the index of port + 6, the index of ] and the index of port again. this is used to get a number from buf.
+            newPort = Integer.parseInt(tempbuf); //takes the string tempbuf and pases it into an int. Sets the int = to newPort
+            System.out.println("newPort is: " + newPort); //prints newPort is: + the newPort number.
+            //example of what would be printed: newPort is: 3004
+            htmlString.append(AgentListener.sendHTMLheader(newPort, NewHost, inLine));//apends to the StringBuilder htmlString.
+            //sends the int newPort, string NewHost, and the sting inLine to AgentListener.sendHTMLheader
+            htmlString.append("<h3>We are migrating to host " + newPort + "</h3> \n");//apends to the StringBuilder htmlString.
+            //makes a <h3> html tag with the text We are migrating to host + the new port number. then makes a new line
+            //Example on webpage: We are migrating to host 3005
+            htmlString.append("<h3>View the source of this page to see how the client is informed of the new location.</h3> \n"); //apends to the StringBuilder htmlString.
+            //makes a <h3> html tag with the text View the source of this page to see how the client is informed of the new location.
+            htmlString.append(AgentListener.sendHTMLsubmit());//apends to the StringBuilder htmlString.
+            
+            System.out.println("Killing parent listening loop.");//prints Killing parent listening loop.
+            ServerSocket ss = parentAgentHolder.sock; // ServerSocket called ss. that gets parentAgentHolder.sock
+            ss.close();//close ServerSocket ss.      
+        }//end of if migrate
+        else if(inLine.indexOf("person") > -1) {//checks to see if index of person is greater than or = to 0.
+            parentAgentHolder.agentState++; //adds to the agentState in the agentHolder parentAgentHolder.
+            htmlString.append(AgentListener.sendHTMLheader(localPort, NewHost, inLine));//apends to the StringBuilder htmlString.
+            //sends the int newPort, string NewHost, and the sting inLine to AgentListener.sendHTMLheader
+            htmlString.append("<h3>We are having a conversation with state   " + parentAgentHolder.agentState + "</h3>\n");//apends to the StringBuilder htmlString.
+            //makes a <h3> html tag with the text We are having a conversation with state+ the int of parentAgentHolder.agentState and makes a new line
+            //Example on webpage: We are having a conversation with state 11
+            htmlString.append(AgentListener.sendHTMLsubmit());//apends to the StringBuilder htmlString.
+        }//clses else if  
+        else {
+            htmlString.append(AgentListener.sendHTMLheader(localPort, NewHost, inLine));//apends to the StringBuilder htmlString.
+            //sends the int newPort, string NewHost, and the sting inLine to AgentListener.sendHTMLheader
+            htmlString.append("You have not entered a valid request!\n");//apends to the StringBuilder htmlString.
+            //prints on the webpage You have not entered a valid request! and then a new line
+            htmlString.append(AgentListener.sendHTMLsubmit());//apends to the StringBuilder htmlString.
+        }//closes else
+        AgentListener.sendHTMLtoStream(htmlString.toString(), out);//send htmlString as a string and out to sendHTMLtoStream
+        sock.close();//closes Socket sock
+      }//end try statment 
+      catch (IOException ioe) { //Catch if try fails. IOException
+        System.out.println(ioe);//prints ioe if try fails
+      }//end of catch
+    }//end run
+  }//end of AgentWorker class
+
+/* 
+Notes on agentHolder class:
+*/
   
-  /**
-   * Basic agent holder object. Holds state info/resources
-   * so we can track the agentState and pass it between ports
-   */
-  class agentHolder {
-    //active serversocket object
+  class agentHolder { //start of class agentHolder
     ServerSocket sock;
-    //basic agentState var
     int agentState;
-    
-    //basic constructor
     agentHolder(ServerSocket s) { sock = s;}
-  }
-  /**
-   * AgentListener objects watch individual ports and respond to requests
-   * made upon them(in this scenario from a standard web browser); Craeted 
-   * by the hostserver when a new request is made to 4242
-   *
-   */
+  }//clases class agentHolder
+  
+/* 
+Notes on AgentListener class:
+*/
+
   class AgentListener extends Thread {
-    //instance vars
     Socket sock;
     int localPort;
-    
-    //basic constructor
     AgentListener(Socket As, int prt) {
       sock = As;
       localPort = prt;
-    }
-    //set a default agent state of 0
+    }//closes AgentListener
     int agentState = 0;
-    
-    //called from start() when a request is made on the listening port
     public void run() {
       BufferedReader in = null;
       PrintStream out = null;
@@ -268,58 +249,36 @@ WEB CLIENT
         String buf;
         out = new PrintStream(sock.getOutputStream());
         in =  new BufferedReader(new InputStreamReader(sock.getInputStream()));
-        
-        //read first line
         buf = in.readLine();
-        
-        //if we have a state, parse the request and store it
         if(buf != null && buf.indexOf("[State=") > -1) {
-      //extract the state from the read line
-      String tempbuf = buf.substring(buf.indexOf("[State=")+7, buf.indexOf("]", buf.indexOf("[State=")));
-      //parse it
-      agentState = Integer.parseInt(tempbuf);
-      //log to server console
-      System.out.println("agentState is: " + agentState);
-      
-        }
+            String tempbuf = buf.substring(buf.indexOf("[State=")+7, buf.indexOf("]", buf.indexOf("[State=")));
+            agentState = Integer.parseInt(tempbuf);
+            System.out.println("agentState is: " + agentState);
+        }//clase if statement 
         
         System.out.println(buf);
-        //string builder to hold the html response
         StringBuilder htmlResponse = new StringBuilder();
-        //output first request html to user
-        //show the port and display the form. we know agentstate is 0 since game hasnt been started
         htmlResponse.append(sendHTMLheader(localPort, NewHost, buf));
         htmlResponse.append("Now in Agent Looper starting Agent Listening Loop\n<br />\n");
         htmlResponse.append("[Port="+localPort+"]<br/>\n");
         htmlResponse.append(sendHTMLsubmit());
-        //display it
         sendHTMLtoStream(htmlResponse.toString(), out);
         
-        //now open a connection at the port
         ServerSocket servsock = new ServerSocket(localPort,2);
-        //create a new agentholder and store the socket and agentState
         agentHolder agenthold = new agentHolder(servsock);
         agenthold.agentState = agentState;
         
-        //wait for connections.
         while(true) {
       sock = servsock.accept();
-      //log a received connection
       System.out.println("Got a connection to agent at port " + localPort);
-      //connection received. create new agentworker object and start it up!
       new AgentWorker(sock, localPort, agenthold).start();
         }
         
       } catch(IOException ioe) {
-        //this happens when an error occurs OR when we switch port
         System.out.println("Either connection failed, or just killed listener loop for agent at port " + localPort);
         System.out.println(ioe);
       }
     }
-    //send the html header but NOT the response header
-    //otherwise same as original implementation. Load html, load form,
-    //add port to action attribute so the next request goes back to the port
-    //or goes to the new one we are listening on
     static String sendHTMLheader(int localPort, String NewHost, String inLine) {
       
       StringBuilder htmlString = new StringBuilder();
@@ -333,12 +292,9 @@ WEB CLIENT
       
       return htmlString.toString();
     }
-    //finish off the html started by sendHTMLheader
     static String sendHTMLsubmit() {
       return "<input type=\"submit\" value=\"Submit\"" + "</p>\n</form></body></html>\n";
     }
-    //send the response headers and calculate the content length so we play nicer with all browsers,
-    //and can actually work with non ie browser
     static void sendHTMLtoStream(String html, PrintStream out) {
       
       out.println("HTTP/1.1 200 OK");
@@ -349,16 +305,12 @@ WEB CLIENT
     }
     
   }
-  /**
-   * 
-   * main hostserver class. this listens on port 4242 for requests. at each request,
-   * increment NextPort and start a new listener on it. Assumes that all ports >3000
-   * are free.
-   */
+
+ /* 
+Notes on HostServer class:
+*/
   public class HostServer {
-    //we start listening on port 3001
     public static int NextPort = 3000;
-    
     public static void main(String[] a) throws IOException {
       int q_len = 6;
       int port = 4242;
@@ -366,19 +318,445 @@ WEB CLIENT
       
       ServerSocket servsock = new ServerSocket(port, q_len);
       System.out.println("Elliott/Reagan DIA Master receiver started at port 4242.");
+      System.out.println("With small edits and comments from Jessica Bender. 3/7/2021");//added this text to show that this is my comments and small changes
       System.out.println("Connect from 1 to 3 browsers using \"http:\\\\localhost:4242\"\n");
-      //listen on port 4242 for new requests OR migrate requests
       while(true) {
-        //increment nextport! could be more sophisticated, but this will work for now 
         NextPort = NextPort + 1;
-        //open socket for requests
         sock = servsock.accept();
-        //log startup
         System.out.println("Starting AgentListener at port " + NextPort);
-        //create new agent listener at this port to wait for requests
         new AgentListener(sock, NextPort).start();
       }
-      
     }
   }
-  
+    //---------------------------------------------End of new comments By Jessica Bender-----------------------------------------------------------------------------------------------------
+    
+//log of what whas printed on my terminal for examples: 
+
+
+//-----------------example with 1 chrome browser open--------------------------
+/*
+C:\Users\jessi\Documents\2020-2021 school\Winter\CSC435winter2021\HostServer>java HostServer
+Elliott/Reagan DIA Master receiver started at port 4242.
+Connect from 1 to 3 browsers using "http:\\localhost:4242"
+
+Starting AgentListener at port 3001
+Starting AgentListener at port 3002
+In AgentListener Thread
+In AgentListener Thread
+GET / HTTP/1.1
+Starting AgentListener at port 3003
+In AgentListener Thread
+GET /favicon.ico HTTP/1.1
+Got a connection to agent at port 3001
+Got a connection to agent at port 3001
+
+Request line: GET /?person=migrate HTTP/1.1
+Starting AgentListener at port 3004
+In AgentListener Thread
+agentState is: 0
+Please host me. Send my port! [State=0]
+newPort is: 3004
+Killing parent listening loop.
+Either connection failed, or just killed listener loop for agent at port 3001
+java.net.SocketException: socket closed
+
+Request line: GET /favicon.ico HTTP/1.1
+Got a connection to agent at port 3004
+Got a connection to agent at port 3004
+
+Request line: GET /?person=migrate HTTP/1.1
+Starting AgentListener at port 3005
+In AgentListener Thread
+agentState is: 0
+Please host me. Send my port! [State=0]
+newPort is: 3005
+Killing parent listening loop.
+Either connection failed, or just killed listener loop for agent at port 3004
+java.net.SocketException: socket closed
+
+Request line: GET /favicon.ico HTTP/1.1
+null
+Got a connection to agent at port 3005
+Got a connection to agent at port 3005
+
+Request line: GET /?person=YourTextInput HTTP/1.1
+
+Request line: GET /favicon.ico HTTP/1.1
+Got a connection to agent at port 3005
+Got a connection to agent at port 3005
+
+Request line: GET /?person=migrate HTTP/1.1
+Starting AgentListener at port 3006
+In AgentListener Thread
+agentState is: 1
+Please host me. Send my port! [State=1]
+newPort is: 3006
+Killing parent listening loop.
+Either connection failed, or just killed listener loop for agent at port 3005
+java.net.SocketException: socket closed
+
+Request line: GET /favicon.ico HTTP/1.1
+Got a connection to agent at port 3006
+Got a connection to agent at port 3006
+
+Request line: GET / HTTP/1.1
+
+Request line: GET /favicon.ico HTTP/1.1
+Got a connection to agent at port 3006
+Got a connection to agent at port 3006
+
+Request line: GET /?person=YourTextInput HTTP/1.1
+
+Request line: GET /favicon.ico HTTP/1.1
+Got a connection to agent at port 3006
+Got a connection to agent at port 3006
+
+Request line: GET /?person=migrate HTTP/1.1
+Starting AgentListener at port 3007
+In AgentListener Thread
+agentState is: 2
+Please host me. Send my port! [State=2]
+newPort is: 3007
+Killing parent listening loop.
+Either connection failed, or just killed listener loop for agent at port 3006
+java.net.SocketException: socket closed
+
+Request line: GET /favicon.ico HTTP/1.1
+*/
+//----------end of log--------------------------------------------------------------
+
+
+
+
+
+
+//-------------example with 3 chrome browsers open------------------------------
+
+/*
+
+C:\Users\jessi\Documents\2020-2021 school\Winter\CSC435winter2021\HostServer>java HostServer
+Elliott/Reagan DIA Master receiver started at port 4242.
+Connect from 1 to 3 browsers using "http:\\localhost:4242"
+
+Starting AgentListener at port 3001
+Starting AgentListener at port 3002
+In AgentListener Thread
+In AgentListener Thread
+GET / HTTP/1.1
+Starting AgentListener at port 3003
+In AgentListener Thread
+GET /favicon.ico HTTP/1.1
+Got a connection to agent at port 3001
+Got a connection to agent at port 3001
+
+Request line: GET /?person=migrate HTTP/1.1
+Starting AgentListener at port 3004
+In AgentListener Thread
+agentState is: 0
+Please host me. Send my port! [State=0]
+newPort is: 3004
+Killing parent listening loop.
+Either connection failed, or just killed listener loop for agent at port 3001
+java.net.SocketException: socket closed
+
+Request line: GET /favicon.ico HTTP/1.1
+Got a connection to agent at port 3004
+Got a connection to agent at port 3004
+
+Request line: GET /?person=migrate HTTP/1.1
+Starting AgentListener at port 3005
+In AgentListener Thread
+agentState is: 0
+Please host me. Send my port! [State=0]
+newPort is: 3005
+Killing parent listening loop.
+Either connection failed, or just killed listener loop for agent at port 3004
+java.net.SocketException: socket closed
+
+Request line: GET /favicon.ico HTTP/1.1
+null
+Got a connection to agent at port 3005
+Got a connection to agent at port 3005
+
+Request line: GET /?person=YourTextInput HTTP/1.1
+
+Request line: GET /favicon.ico HTTP/1.1
+Got a connection to agent at port 3005
+Got a connection to agent at port 3005
+
+Request line: GET /?person=migrate HTTP/1.1
+Starting AgentListener at port 3006
+In AgentListener Thread
+agentState is: 1
+Please host me. Send my port! [State=1]
+newPort is: 3006
+Killing parent listening loop.
+Either connection failed, or just killed listener loop for agent at port 3005
+java.net.SocketException: socket closed
+
+Request line: GET /favicon.ico HTTP/1.1
+Got a connection to agent at port 3006
+Got a connection to agent at port 3006
+
+Request line: GET / HTTP/1.1
+
+Request line: GET /favicon.ico HTTP/1.1
+Got a connection to agent at port 3006
+Got a connection to agent at port 3006
+
+Request line: GET /?person=YourTextInput HTTP/1.1
+
+Request line: GET /favicon.ico HTTP/1.1
+Got a connection to agent at port 3006
+Got a connection to agent at port 3006
+
+Request line: GET /?person=migrate HTTP/1.1
+Starting AgentListener at port 3007
+In AgentListener Thread
+agentState is: 2
+Please host me. Send my port! [State=2]
+newPort is: 3007
+Killing parent listening loop.
+Either connection failed, or just killed listener loop for agent at port 3006
+java.net.SocketException: socket closed
+
+Request line: GET /favicon.ico HTTP/1.1
+
+C:\Users\jessi\Documents\2020-2021 school\Winter\CSC435winter2021\HostServer>java HostServer
+Elliott/Reagan DIA Master receiver started at port 4242.
+Connect from 1 to 3 browsers using "http:\\localhost:4242"
+
+Starting AgentListener at port 3001
+Starting AgentListener at port 3002
+In AgentListener Thread
+In AgentListener Thread
+GET / HTTP/1.1
+Starting AgentListener at port 3003
+In AgentListener Thread
+GET /favicon.ico HTTP/1.1
+Got a connection to agent at port 3002
+Got a connection to agent at port 3002
+
+Request line: GET /?person=hdlew HTTP/1.1
+
+Request line: GET /favicon.ico HTTP/1.1
+Got a connection to agent at port 3002
+Got a connection to agent at port 3002
+
+Request line: GET /?person=YourTextInputsIVH HTTP/1.1
+
+Request line: GET /favicon.ico HTTP/1.1
+Got a connection to agent at port 3002
+Got a connection to agent at port 3002
+
+Request line: GET /?person=JYYF HTTP/1.1
+
+Request line: GET /favicon.ico HTTP/1.1
+Got a connection to agent at port 3002
+Got a connection to agent at port 3002
+
+Request line: GET /?person=migrate HTTP/1.1
+Starting AgentListener at port 3004
+In AgentListener Thread
+agentState is: 3
+Please host me. Send my port! [State=3]
+newPort is: 3004
+Killing parent listening loop.
+Either connection failed, or just killed listener loop for agent at port 3002
+java.net.SocketException: socket closed
+
+Request line: GET /favicon.ico HTTP/1.1
+Got a connection to agent at port 3004
+Got a connection to agent at port 3004
+
+Request line: GET /?person=person HTTP/1.1
+
+Request line: GET /favicon.ico HTTP/1.1
+null
+Got a connection to agent at port 3004
+Got a connection to agent at port 3004
+
+Request line: GET /?person= HTTP/1.1
+
+Request line: GET /favicon.ico HTTP/1.1
+Got a connection to agent at port 3004
+Got a connection to agent at port 3004
+
+Request line: GET /?person=YourTextInput HTTP/1.1
+
+Request line: GET /favicon.ico HTTP/1.1
+Got a connection to agent at port 3004
+Got a connection to agent at port 3004
+
+Request line: GET /?person=YourTextInput HTTP/1.1
+
+Request line: GET /favicon.ico HTTP/1.1
+Got a connection to agent at port 3004
+Got a connection to agent at port 3004
+
+Request line: GET /?person=YourTextInput HTTP/1.1
+
+Request line: GET /favicon.ico HTTP/1.1
+Got a connection to agent at port 3004
+Got a connection to agent at port 3004
+
+Request line: GET /?person=YourTextInput HTTP/1.1
+
+Request line: GET /favicon.ico HTTP/1.1
+Got a connection to agent at port 3004
+Got a connection to agent at port 3004
+
+Request line: GET /?person=YourTextInput HTTP/1.1
+
+Request line: GET /favicon.ico HTTP/1.1
+Got a connection to agent at port 3004
+Got a connection to agent at port 3004
+
+Request line: GET /?person=migrate HTTP/1.1
+Starting AgentListener at port 3005
+In AgentListener Thread
+agentState is: 10
+Please host me. Send my port! [State=10]
+newPort is: 3005
+Killing parent listening loop.
+Either connection failed, or just killed listener loop for agent at port 3004
+java.net.SocketException: socket closed
+
+Request line: GET /favicon.ico HTTP/1.1
+Got a connection to agent at port 3005
+Got a connection to agent at port 3005
+
+Request line: GET /?person=YourTextInput HTTP/1.1
+
+Request line: GET /favicon.ico HTTP/1.1
+Got a connection to agent at port 3005
+Got a connection to agent at port 3005
+
+Request line: GET /?person=migrate HTTP/1.1
+Starting AgentListener at port 3006
+In AgentListener Thread
+agentState is: 11
+Please host me. Send my port! [State=11]
+newPort is: 3006
+Killing parent listening loop.
+Either connection failed, or just killed listener loop for agent at port 3005
+java.net.SocketException: socket closed
+
+Request line: GET /favicon.ico HTTP/1.1
+Got a connection to agent at port 3006
+Got a connection to agent at port 3006
+
+Request line: GET /?person=YourTextInput HTTP/1.1
+
+Request line: GET /favicon.ico HTTP/1.1
+Starting AgentListener at port 3007
+Starting AgentListener at port 3008
+In AgentListener Thread
+In AgentListener Thread
+GET / HTTP/1.1
+GET /favicon.ico HTTP/1.1
+Starting AgentListener at port 3009
+Starting AgentListener at port 3010
+In AgentListener Thread
+In AgentListener Thread
+GET / HTTP/1.1
+GET /favicon.ico HTTP/1.1
+Got a connection to agent at port 3008
+Got a connection to agent at port 3008
+
+Request line: GET /?person=dsahj HTTP/1.1
+
+Request line: GET /favicon.ico HTTP/1.1
+Got a connection to agent at port 3010
+Got a connection to agent at port 3010
+
+Request line: GET /?person=dsa HTTP/1.1
+
+Request line: GET /favicon.ico HTTP/1.1
+Got a connection to agent at port 3006
+Got a connection to agent at port 3006
+
+Request line: GET /?person=ads HTTP/1.1
+
+Request line: GET /favicon.ico HTTP/1.1
+Got a connection to agent at port 3008
+Got a connection to agent at port 3008
+
+Request line: GET /?person=da HTTP/1.1
+
+Request line: GET /favicon.ico HTTP/1.1
+Got a connection to agent at port 3010
+Got a connection to agent at port 3010
+
+Request line: GET /?person=YourTextIncput HTTP/1.1
+
+Request line: GET /favicon.ico HTTP/1.1
+Got a connection to agent at port 3006
+Got a connection to agent at port 3006
+
+Request line: GET /?person=YourTextInput HTTP/1.1
+
+Request line: GET /favicon.ico HTTP/1.1
+Got a connection to agent at port 3006
+Got a connection to agent at port 3006
+
+Request line: GET /?person=YourTextInput HTTP/1.1
+
+Request line: GET /favicon.ico HTTP/1.1
+Got a connection to agent at port 3006
+Got a connection to agent at port 3006
+
+Request line: GET /?person=YourTextInput HTTP/1.1
+
+Request line: GET /favicon.ico HTTP/1.1
+Got a connection to agent at port 3006
+Got a connection to agent at port 3006
+
+Request line: GET /?person=YourTextInput HTTP/1.1
+
+Request line: GET /favicon.ico HTTP/1.1
+Got a connection to agent at port 3006
+Got a connection to agent at port 3006
+
+Request line: GET /?person=YourTextInput HTTP/1.1
+
+Request line: GET /favicon.ico HTTP/1.1
+Got a connection to agent at port 3008
+Got a connection to agent at port 3008
+
+Request line: GET /?person=YourTextInput HTTP/1.1
+
+Request line: GET /favicon.ico HTTP/1.1
+Got a connection to agent at port 3008
+Got a connection to agent at port 3008
+
+Request line: GET /?person=YourTextInput HTTP/1.1
+
+Request line: GET /favicon.ico HTTP/1.1
+Got a connection to agent at port 3008
+Got a connection to agent at port 3008
+
+Request line: GET /?person=YourTextInput HTTP/1.1
+
+Request line: GET /favicon.ico HTTP/1.1
+Got a connection to agent at port 3010
+Got a connection to agent at port 3010
+
+Request line: GET /?person=YourTextInput HTTP/1.1
+
+Request line: GET /favicon.ico HTTP/1.1
+
+*/
+
+//----------end of log--------------------------------------------------------------
+
+
+
+
+
+//-------------example with my code edits :) ------------------------------
+
+/*
+
+*/
+//----------end of log--------------------------------------------------------------
