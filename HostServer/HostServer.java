@@ -90,18 +90,18 @@ WEB CLIENT
 /* 
 Ran the progam and connected to http:\\localhost:4242 on Google Chrome browser.
 Minor code changes I made: 
-    1. added on line ___:
+    1. added on line 365:
         System.out.println("With small edits and comments from Jessica Bender. 3/7/2021");//added this text to show that this is my comments and small changes
-    2. 
+    2. changed he imports to be .*
 
 
 Logs: 
     example with 1 chrome browser open 
-        Line 
+        Line 382
     example with 3 chrome browsers open        
-        Line 
+        Line 479
     example with my code edits :)        
-        Line 
+        Line 803
 */
 
 /* 
@@ -239,6 +239,9 @@ This class is used in the AgentWorker class and the AgentListener class.
   
 /* 
 Notes on AgentListener class:
+the main purpus of this class is to make the html form 
+this class is called by AgentWorker and HostServer
+it calles AgentWorker in its code.
 */
 
   class AgentListener extends Thread { //new class AgentListener that extends Thread
@@ -349,28 +352,28 @@ Notes on AgentListener class:
 
  /* 
 Notes on HostServer class:
+this is the main class of the program. 
+The purpose of this class is to print some basic statements and start the AgentListener
 */
-  public class HostServer {
-    public static int NextPort = 3000;//
-    public static void main(String[] a) throws IOException {//start of main
-      int q_len = 6;
-      int port = 4242;
-      Socket sock;
-      
-      ServerSocket servsock = new ServerSocket(port, q_len);
-      System.out.println("Elliott/Reagan DIA Master receiver started at port 4242.");
+  public class HostServer {//start of HostServer class. The main class for the program.
+    public static int NextPort = 3000;//new public int called NextPort and set to NextPort
+    public static void main(String[] a) throws IOException {//start of main thows IOException
+      int q_len = 6;//new int called q_len assigned to 6
+      int port = 4242;// new in called port and assigned to 4242
+      Socket sock;//new socket called sock
+      ServerSocket servsock = new ServerSocket(port, q_len); //new ServerSocket called servsock that takes in port and q_len. ie, 6 and 4242
+      System.out.println("Elliott/Reagan DIA Master receiver started at port 4242.");//prints this to terminal
       System.out.println("With small edits and comments from Jessica Bender. 3/7/2021");//added this text to show that this is my comments and small changes
-      System.out.println("Connect from 1 to 3 browsers using \"http:\\\\localhost:4242\"\n");
-      while(true) {
-        NextPort = NextPort + 1;
-        sock = servsock.accept();
-        System.out.println("Starting AgentListener at port " + NextPort);
-        new AgentListener(sock, NextPort).start();
+      System.out.println("Connect from 1 to 3 browsers using \"http:\\\\localhost:4242\"\n");//prints this to terminal
+      while(true) {//while true do the following code
+        NextPort = NextPort + 1;//add 1 to each new port. 3001, 3002, 3003 .... and so on
+        sock = servsock.accept();// accept servsock and assign to sock
+        System.out.println("Starting AgentListener at port " + NextPort);//print Starting AgentListener at port + NextPort
+        //example : Starting AgentListener at port 3002
+        new AgentListener(sock, NextPort).start(); // starts AgentListener with sock and NextPort
       }//end of while
     }//end of main
   }//end of HostServer
-
-  
     //---------------------------------------------End of new comments By Jessica Bender-----------------------------------------------------------------------------------------------------
     
 //log of what whas printed on my terminal for examples: 
